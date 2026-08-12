@@ -42,17 +42,12 @@ public class PlayerController : MonoBehaviour
             Mathf.Cos(radians)
         );
 
-        
+        animator.SetBool("isMoving", true);
 
-        if (moveDirection.x < 0f)
-        {
-            animator.SetBool("isMoving", true);
-            animator.SetBool("isLeft", true);
-        }
-        else if (moveDirection.x > 0f)
-        {   animator.SetBool("isMoving", true);
-            animator.SetBool("isLeft", false);
-        }
+        bool isLeft = moveDirection.x < -0.1f
+            || (Mathf.Abs(moveDirection.x) <= 0.1f && moveDirection.z > 0f);
+
+        animator.SetBool("isLeft", isLeft);
     }
 
     private void FixedUpdate()
