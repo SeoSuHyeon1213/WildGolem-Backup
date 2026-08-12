@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f604f18bea8738c44aadd372b6093701
+guid: 0b89f0dc8b8bf574dab6b2c8ecfcf62f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 800
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FrontSideSprite_0
+      name: WalkLeftSprite_0
       rect:
         serializedVersion: 2
-        x: 143
-        y: 47
-        width: 784
-        height: 966
+        x: 229
+        y: 28
+        width: 583
+        height: 963
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7c7e3c9e21db9049bcf96c8793d9065
-      internalID: 21295216
+      spriteID: c731bc3bc637e7a479d0c837fb9f9bf0
+      internalID: -793172748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FrontSideSprite_1
+      name: WalkLeftSprite_1
       rect:
         serializedVersion: 2
-        x: 1306
-        y: 13
-        width: 514
-        height: 1000
+        x: 1267
+        y: 8
+        width: 563
+        height: 1009
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 128e910063cd4db43ab602c23dc96888
-      internalID: -1574740065
+      spriteID: f4fdca0a681b7424394ec052f9c97017
+      internalID: -935373131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FrontSideSprite_2
+      name: WalkLeftSprite_2
       rect:
         serializedVersion: 2
-        x: 2294
-        y: 57
-        width: 594
-        height: 956
+        x: 2184
+        y: 19
+        width: 783
+        height: 972
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,30 +169,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac7cb664571508f489d278d5cce32918
-      internalID: -57247493
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FrontSideSprite_3
-      rect:
-        serializedVersion: 2
-        x: 3362
-        y: 13
-        width: 514
-        height: 1000
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a59a7f1fcbd2284c83bc12949de8074
-      internalID: 314687929
+      spriteID: 949bfda8b76712d429730541bb96b43f
+      internalID: -1142614097
       vertices: []
       indices: 
       edges: []
@@ -201,7 +179,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 796de615c058fde4c8da44d42140ac76
+    spriteID: 456df3f36d8a1604195df75076ac16a9
     internalID: 0
     vertices: []
     indices: 
@@ -213,10 +191,9 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      FrontSideSprite_0: 21295216
-      FrontSideSprite_1: -1574740065
-      FrontSideSprite_2: -57247493
-      FrontSideSprite_3: 314687929
+      WalkLeftSprite_0: -793172748
+      WalkLeftSprite_1: -935373131
+      WalkLeftSprite_2: -1142614097
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
