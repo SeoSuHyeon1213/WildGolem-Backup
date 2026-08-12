@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
         if (moveDirection == Vector3.zero)
             return;
 
-        Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-        playerRigidbody.MoveRotation(targetRotation);
+        //Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+        //playerRigidbody.MoveRotation(targetRotation);
 
         Vector3 nextPosition = playerRigidbody.position
             + moveDirection * speed * Time.fixedDeltaTime;
