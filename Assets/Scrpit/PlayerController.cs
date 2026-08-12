@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Joystick joystick;
+    [SerializeField] private Animator animator;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float deadZone = 0.2f;
 
@@ -12,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour
         if (input.sqrMagnitude < deadZone * deadZone)
         {
             moveDirection = Vector3.zero;
+            animator.SetBool("isMoving", false);
             return;
         }
 
@@ -36,15 +41,24 @@ public class PlayerController : MonoBehaviour
             0f,
             Mathf.Cos(radians)
         );
+
+        
+
+        if (moveDirection.x < 0f)
+        {
+            animator.SetBool("isMoving", true);
+            animator.SetBool("isLeft", true);
+        }
+        else if (moveDirection.x > 0f)
+        {   animator.SetBool("isMoving", true);
+            animator.SetBool("isLeft", false);
+        }
     }
 
     private void FixedUpdate()
     {
         if (moveDirection == Vector3.zero)
             return;
-
-        //Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-        //playerRigidbody.MoveRotation(targetRotation);
 
         Vector3 nextPosition = playerRigidbody.position
             + moveDirection * speed * Time.fixedDeltaTime;
