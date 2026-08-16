@@ -41,7 +41,10 @@ public class Partycontroller : MonoBehaviour
     private void Update()
     {
         if (player == null || members == null || members.Length == 0)
+        {
+            Debug.Log("Player or party members are not set up correctly");
             return;
+        }
 
         Vector3 movement = player.position - previousPlayerPosition;
         movement.y = 0f;
@@ -62,8 +65,10 @@ public class Partycontroller : MonoBehaviour
         previousPlayerPosition = player.position;
 
         if (Time.time < nextPathUpdateTime)
+        {
+            Debug.Log("Waiting for next path update time");
             return;
-
+        }
         nextPathUpdateTime = Time.time + pathUpdateInterval;
 
         if (stoppedTime >= stopDelay)
@@ -103,7 +108,10 @@ public class Partycontroller : MonoBehaviour
     private void SetDestination(NavMeshAgent member, Vector3 targetPosition)
     {
         if (member == null || !member.isOnNavMesh)
+        {
+            Debug.Log("Member is null or not on NavMesh");
             return;
+        }
 
         if (NavMesh.SamplePosition(
                 targetPosition,
