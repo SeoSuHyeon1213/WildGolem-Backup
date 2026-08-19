@@ -75,6 +75,10 @@ public class Partycontroller : MonoBehaviour
             ArrangeAroundPlayer();
         else
             FollowPlayer();
+        
+        float angle = Mathf.Atan2(lastMoveDirection.x, lastMoveDirection.z) * Mathf.Rad2Deg;
+        float snappedAngle = Mathf.Round(angle / 45f) * 45f;
+        float radians = snappedAngle * Mathf.Deg2Rad;
     }
 
     private void FollowPlayer()
