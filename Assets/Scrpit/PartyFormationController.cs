@@ -39,14 +39,33 @@ public class PartyFormationController : MonoBehaviour
 
         memberAnimators = new Animator[members.Length];
 
-        for (int i = 0; i < members.Length; i++)
+        if (player == null)
+            return;
+
+        int slotCount = Mathf.Min(members.Length, SlotDirections.Length);
+
+        for (int i = 0; i < slotCount; i++)
         {
-            if (members[i] != null)
-                memberAnimators[i] = members[i].GetComponentInChildren<Animator>();
+            Transform member = members[i];
+
+            if (member == null)
+                continue;
+
+            memberAnimators[i] = member.GetComponentInChildren<Animator>();
+
+            if (member.TryGetComponent(out Rigidbody memberRigidbody))
+            {
+                Debug.LogWarning(
+                    $"Remove the Rigidbody from party member '{member.name}' "
+                    + "so its Collider becomes part of the player's compound Collider.",
+                    memberRigidbody);
+            }
+
+            member.SetParent(player, true);
+            member.localPosition = SlotDirections[i] * formationDistance;
         }
 
-        if (player != null)
-            previousPlayerPosition = player.position;
+        previousPlayerPosition = player.position;
     }
 
     private void LateUpdate()
@@ -65,23 +84,20 @@ public class PartyFormationController : MonoBehaviour
 
         bool isMoving = Time.time - lastMovementTime <= animationStopDelay;
 
-        MoveMembers();
+        KeepFormation();
         UpdateAnimations(isMoving);
 
         previousPlayerPosition = player.position;
     }
 
-    private void MoveMembers()
+    private void KeepFormation()
     {
         int slotCount = Mathf.Min(members.Length, SlotDirections.Length);
 
         for (int i = 0; i < slotCount; i++)
         {
-            if (members[i] == null)
-                continue;
-
-            members[i].position = player.position
-                + SlotDirections[i] * formationDistance;
+            if (members[i] != null)
+                members[i].localPosition = SlotDirections[i] * formationDistance;
         }
     }
 
