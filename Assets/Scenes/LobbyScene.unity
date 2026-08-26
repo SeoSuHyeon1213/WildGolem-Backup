@@ -695,9 +695,9 @@ GameObject:
   - component: {fileID: 656570326}
   - component: {fileID: 656570325}
   - component: {fileID: 656570324}
-  - component: {fileID: 656570323}
-  - component: {fileID: 656570329}
   - component: {fileID: 656570328}
+  - component: {fileID: 656570330}
+  - component: {fileID: 656570329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -705,24 +705,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &656570323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656570322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196029a162cf33046a1851d5b76b8d81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  joystick: {fileID: 1824929773}
-  animator: {fileID: 0}
-  speed: 5
-  deadZone: 0.2
-  moveTime: 0.5
-  waitTime: 0.5
 --- !u!65 &656570324
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -876,21 +858,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 656570322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6031e85fbed0b5a408bcdd55da5cbacf, type: 3}
+  m_Script: {fileID: 11500000, guid: f6ff48a4ff53c4299911eb4c130ce29f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PartyFormationController
-  player: {fileID: 656570327}
-  members:
-  - {fileID: 1183504830}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  formationDistance: 1.5
-  animationStopDelay: 0.1
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!114 &656570330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656570322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf597653223b9ca42847b8903a24e482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+  joystick: {fileID: 1824929773}
 --- !u!1 &792650384
 GameObject:
   m_ObjectHideFlags: 0
