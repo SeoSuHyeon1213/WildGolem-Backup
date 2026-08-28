@@ -3,15 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange1 : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public void ChangeSceneToOne()
     {
-        if (other.tag == "Player")
-        {
- 
-                SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
 
-            
-        }
     }
 
     
