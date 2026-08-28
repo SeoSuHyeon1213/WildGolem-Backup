@@ -7,10 +7,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnimator;
     private float moveSpeed = 5f;
     private float dashSpeed = 10f;
+
     //private float rotateSpeed = 180f;
     bool isMoving = false;
+    float waitTime = 0f;
+
     //bool isLeft = false;
-    void Awake()
+    private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
@@ -81,8 +84,9 @@ public class PlayerMovement : MonoBehaviour
 
         
     }
+    
     public void Dash(){
-        float waitTime = 0f;
+        
         
         waitTime += Time.deltaTime;
         if(waitTime < 5f)
@@ -92,10 +96,14 @@ public class PlayerMovement : MonoBehaviour
         if(waitTime >= 5f)
         {
             StartDialogue();
-            moveSpeed += dashSpeed;
+            SetMoveSpeed(dashSpeed);
             waitTime = 0f;
         }
         
+    }
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed += speed;
     }
 
     public void StartDialogue()
