@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
     private float moveSpeed = 5f;
+    private float dashSpeed = 10f;
     //private float rotateSpeed = 180f;
     bool isMoving = false;
     //bool isLeft = false;
@@ -77,6 +78,34 @@ public class PlayerMovement : MonoBehaviour
         //     playerAnimator.SetBool("isMoving", false);
         //     playerAnimator.SetBool("isLeft", false);
         // }
+
         
     }
+    public void Dash(){
+        float waitTime = 0f;
+        
+        waitTime += Time.deltaTime;
+        if(waitTime < 5f)
+        {
+            EndDialogue();
+        }
+        if(waitTime >= 5f)
+        {
+            StartDialogue();
+            moveSpeed += dashSpeed;
+            waitTime = 0f;
+        }
+        
+    }
+
+    public void StartDialogue()
+    {
+        playerInput.DisableMovement();
+    }
+
+    public void EndDialogue()
+    {
+        playerInput.EnableMovement();
+    }
+        
 }

@@ -11,6 +11,8 @@ public class PlayerInput : MonoBehaviour
     public Vector3 MoveInput { get; private set; }
     public Vector3 LookInput { get; private set; }
     public bool JumpPressed { get; private set; }
+    public bool IsMovementEnabled { get; private set; } = true;
+
 
     // Input Action Asset에서 만든 액션을 이 함수들이 자동으로 호출해줌
     // (PlayerInput 컴포넌트의 Behavior를 "Send Messages"로 설정)
@@ -28,15 +30,19 @@ public class PlayerInput : MonoBehaviour
         MoveInput = value.Get<Vector3>();
     }
 
-    // public void OnLook(InputValue value)
-    // {
-    //     LookInput = value.Get<Vector3>();
-    // }
+    public void DisableMovement()
+    {
+        IsMovementEnabled = false;
+        joystickInput = Vector3.zero;
+        MoveInput = Vector3.zero;
+    }
 
-    // public void OnJump(InputValue value)
-    // {
-    //     JumpPressed = value.isPressed;
-    // }
+    public void EnableMovement()
+    {
+        IsMovementEnabled = true;
+    }
+
+
 }
     
 
