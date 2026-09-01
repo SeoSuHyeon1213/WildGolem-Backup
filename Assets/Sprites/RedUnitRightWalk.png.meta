@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 031d4c95cea98194e8297023ccfd0651
+guid: 0bfdb2a7824f9134fa5502e162d46b5f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IdleSprite_0
+      name: RedUnitRightWalk_0
       rect:
         serializedVersion: 2
-        x: 238
-        y: 8
-        width: 566
-        height: 1011
+        x: 95
+        y: 31
+        width: 832
+        height: 913
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba074db8872fe374d9792e8525df5b5a
-      internalID: 348450220
+      spriteID: c9db74f923324c04980aa3e75ae89b7c
+      internalID: 1204692134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleSprite_1
+      name: RedUnitRightWalk_1
       rect:
         serializedVersion: 2
-        x: 1266
-        y: 7
-        width: 565
-        height: 1012
+        x: 1133
+        y: 51
+        width: 816
+        height: 893
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7d676532f1f62249ae3da6406c10d7c
-      internalID: -1066315084
+      spriteID: 3b0243fcc280a64479a8dfb70d744f17
+      internalID: -295643496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleSprite_2
+      name: RedUnitRightWalk_2
       rect:
         serializedVersion: 2
-        x: 2294
-        y: 7
-        width: 566
-        height: 1012
+        x: 2107
+        y: 32
+        width: 926
+        height: 912
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 098cc5e4775c14a458c978f95c4d22d6
-      internalID: 1360355107
+      spriteID: 224056fe5a6c57c4b823283240f379c1
+      internalID: 483700924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleSprite_3
+      name: RedUnitRightWalk_3
       rect:
         serializedVersion: 2
-        x: 3322
-        y: 7
-        width: 564
-        height: 1012
+        x: 3189
+        y: 51
+        width: 815
+        height: 893
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1d9495d9390ef54ca9662e693eba7a8
-      internalID: 934715306
+      spriteID: f713a0c30e44e044b8ffd04851748988
+      internalID: 2042262745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleSprite_4
+      name: RedUnitRightWalk_4
       rect:
         serializedVersion: 2
-        x: 4349
-        y: 7
-        width: 566
-        height: 1012
+        x: 4208
+        y: 31
+        width: 830
+        height: 913
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,8 +213,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c24b8f2f6fb7d5d4d95adc3dcbb78e1d
-      internalID: 1340772719
+      spriteID: 30f3c93bb8921e24c88a9691cd7d53e9
+      internalID: 694312236
       vertices: []
       indices: 
       edges: []
@@ -223,7 +223,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4c5913450247bac46a767b25dc0b5c61
+    spriteID: 2e2bf2a5b50edc841be9706eca715e66
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      IdleSprite_0: 348450220
-      IdleSprite_1: -1066315084
-      IdleSprite_2: 1360355107
-      IdleSprite_3: 934715306
-      IdleSprite_4: 1340772719
+      RedUnitRightWalk_0: 1204692134
+      RedUnitRightWalk_1: -295643496
+      RedUnitRightWalk_2: 483700924
+      RedUnitRightWalk_3: 2042262745
+      RedUnitRightWalk_4: 694312236
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

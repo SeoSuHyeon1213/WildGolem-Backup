@@ -7,12 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnimator;
     private float moveSpeed = 5f;
     private float dashSpeed = 10f;
-
-    //private float rotateSpeed = 180f;
     bool isMoving = false;
     float waitTime = 0f;
 
-    //bool isLeft = false;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -63,25 +60,6 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("isMoving", false);
             playerAnimator.SetBool("isLeft", false);
         }
-
-       //Vector3 lookDirection = playerInput.LookInput;
-        // if (lookDirection.sqrMagnitude > 0.01f)
-        // {
-        //     Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-        //     playerRigidbody.rotation = Quaternion.RotateTowards(
-        //         playerRigidbody.rotation,
-        //         targetRotation,
-        //         rotateSpeed * Time.deltaTime
-        //     );
-        //     playerAnimator.SetBool("isMoving", true);
-        //     playerAnimator.SetBool("isLeft", true);
-        // }
-        // else
-        // {
-        //     playerAnimator.SetBool("isMoving", false);
-        //     playerAnimator.SetBool("isLeft", false);
-        // }
-
         
     }
     
