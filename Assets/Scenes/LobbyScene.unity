@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 656570328}
   - component: {fileID: 656570330}
   - component: {fileID: 656570329}
+  - component: {fileID: 656570331}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -875,6 +876,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
   joystick: {fileID: 1824929773}
+--- !u!114 &656570331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656570322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58569c29592f4b44495068014204be6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PartyController1
+  player: {fileID: 656570327}
+  members:
+  - {fileID: 1183504830}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  formationDistance: 1.5
+  animationStopDelay: 0.1
 --- !u!1 &792650384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,15 +2245,15 @@ MonoBehaviour:
   Composition:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
-      Enabled: 0
-      Size: {x: 1, y: 1}
+      Enabled: 1
+      Size: {x: 0, y: 0}
     HardLimits:
-      Enabled: 0
-      Size: {x: 2, y: 2}
+      Enabled: 1
+      Size: {x: 0, y: 0}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 0
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0, y: 0}
   Lookahead:
     Enabled: 0
     Time: 0
