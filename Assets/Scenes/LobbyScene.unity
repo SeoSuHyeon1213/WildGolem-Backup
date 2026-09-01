@@ -699,6 +699,7 @@ GameObject:
   - component: {fileID: 656570330}
   - component: {fileID: 656570329}
   - component: {fileID: 656570331}
+  - component: {fileID: 656570332}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -900,6 +901,20 @@ MonoBehaviour:
   - {fileID: 0}
   formationDistance: 1.5
   animationStopDelay: 0.1
+--- !u!114 &656570332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656570322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161957a846715e946a4de15dcbb4a6c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
+  maxDashSpeed: 15
+  accelerationTime: 2
 --- !u!1 &792650384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,6 +1151,7 @@ GameObject:
   - component: {fileID: 883394922}
   - component: {fileID: 883394921}
   - component: {fileID: 883394920}
+  - component: {fileID: 883394923}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1206,19 +1222,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 883394921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 656570329}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Dash
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &883394921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,6 +1261,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883394918}
   m_CullTransparentMesh: 1
+--- !u!114 &883394923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883394918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656570332}
+          m_TargetAssemblyTypeName: PlayerDash, Assembly-CSharp
+          m_MethodName: BeginDash
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656570332}
+          m_TargetAssemblyTypeName: PlayerDash, Assembly-CSharp
+          m_MethodName: EndDash
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &943667423
 GameObject:
   m_ObjectHideFlags: 0
