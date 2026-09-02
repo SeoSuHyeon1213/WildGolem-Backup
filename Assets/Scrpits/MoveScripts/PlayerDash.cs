@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerDash : MonoBehaviour
 {
-    [SerializeField] private float maxDashSpeed = 15f;
-    [SerializeField] private float accelerationTime = 2f;
+    private float maxDashSpeed = 5f;
+    private float accelerationTime = 2f;
     private int dashCount = 0;
 
     private PlayerMovement playerMovement;
@@ -15,22 +15,15 @@ public class PlayerDash : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Update()
-    {
-        if (isDashButtonHeld)
-        {
-            BeginDash();
-            StartCoroutine(DashCoroutine());
-        }
-        else
-        {
-           EndDash();
-        }
-    }
-
-    public void BeginDash()
+    public void Dash()
     {
         isDashButtonHeld = true;
+        StartCoroutine(ChargeDash());
+        if(!isDashButtonHeld)
+        {
+            EndDash();
+        }
+        
     }
 
     public void EndDash()
@@ -39,13 +32,13 @@ public class PlayerDash : MonoBehaviour
         playerMovement.ResetMoveSpeed();
     }
 
-    public IEnumerator DashCoroutine()
+    public IEnumerator ChargeDash()
     {
         if(dashCount < 10)
         {
             playerMovement.SetMoveSpeed(maxDashSpeed);
-            dashCount++;
             yield return new WaitForSeconds(accelerationTime);
+            dashCount++;
         }
     }
 }
