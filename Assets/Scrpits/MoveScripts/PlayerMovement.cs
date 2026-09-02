@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetMoveSpeed(float speed)
     {
-        moveSpeed = Mathf.Max(0f, speed);
+        moveSpeed += speed;
     }
 
     public void ResetMoveSpeed()

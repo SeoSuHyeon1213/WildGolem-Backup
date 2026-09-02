@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerDash : MonoBehaviour
 {
     [SerializeField] private float maxDashSpeed = 15f;
     [SerializeField] private float accelerationTime = 2f;
+    private int dashCount = 0;
 
     private PlayerMovement playerMovement;
     private bool isDashButtonHeld;
@@ -15,25 +17,15 @@ public class PlayerDash : MonoBehaviour
 
     private void Update()
     {
-        if (!isDashButtonHeld)
-            return;
-
-        float targetSpeed = Mathf.Max(
-            maxDashSpeed,
-            playerMovement.DefaultMoveSpeed
-        );
-
-        float acceleration =
-            (targetSpeed - playerMovement.DefaultMoveSpeed)
-            / Mathf.Max(accelerationTime, 0.01f);
-
-        float nextSpeed = Mathf.MoveTowards(
-            playerMovement.MoveSpeed,
-            targetSpeed,
-            acceleration * Time.deltaTime
-        );
-
-        playerMovement.SetMoveSpeed(nextSpeed);
+        if (isDashButtonHeld)
+        {
+            BeginDash();
+            StartCoroutine(DashCoroutine());
+        }
+        else
+        {
+           EndDash();
+        }
     }
 
     public void BeginDash()
@@ -47,11 +39,13 @@ public class PlayerDash : MonoBehaviour
         playerMovement.ResetMoveSpeed();
     }
 
-    private void OnDisable()
+    public IEnumerator DashCoroutine()
     {
-        isDashButtonHeld = false;
-
-        if (playerMovement != null)
-            playerMovement.ResetMoveSpeed();
+        if(dashCount < 10)
+        {
+            playerMovement.SetMoveSpeed(maxDashSpeed);
+            dashCount++;
+            yield return new WaitForSeconds(accelerationTime);
+        }
     }
 }
