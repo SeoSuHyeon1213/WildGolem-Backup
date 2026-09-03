@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public interface IUnit{
-    void Attack(IUnit target);
+public interface IUnit
+{
+    void Attack(Transform target);
 
-    void TakeDamage(int damage);
+    void takeDamage(int damage);
+
+    void hpHeal(int amount);
+
+    void spHeal(int amount);
 }
