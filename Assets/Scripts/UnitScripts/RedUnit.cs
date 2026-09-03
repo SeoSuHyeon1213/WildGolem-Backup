@@ -3,9 +3,20 @@ using UnityEngine;
 public class RedUnit : MonoBehaviour, IUnit
 {
     private Transform enemytarget;
-    private int HP = 100;
-    private int SP = 50;
-    private int attackPower = 10;
+
+    public RedInfo redInfo;
+    int HP;
+    int SP;
+    int attackPower;
+    float attackSpeed;
+    public void Initialize(RedInfo info)
+    {
+        redInfo = info;
+        HP = redInfo.HP;
+        SP = redInfo.SP;
+        attackPower = redInfo.Damage;
+        attackSpeed = redInfo.AttackSpeed;
+    }
     public void Attack(Transform target)
     {
         Debug.Log("RedUnit attacks " + target.name);
