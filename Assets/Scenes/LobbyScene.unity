@@ -913,8 +913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161957a846715e946a4de15dcbb4a6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
-  maxDashSpeed: 15
-  accelerationTime: 2
 --- !u!1 &792650384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,6 +1624,7 @@ GameObject:
   - component: {fileID: 1183504830}
   - component: {fileID: 1183504829}
   - component: {fileID: 1183504828}
+  - component: {fileID: 1183504835}
   - component: {fileID: 1183504832}
   - component: {fileID: 1183504834}
   m_Layer: 0
@@ -1775,6 +1774,19 @@ NavMeshAgent:
   m_BaseOffset: 0.55
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1183504835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183504827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d740e86c9559f4394878e09f6c2f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedUnit
+  redInfo: {fileID: 0}
 --- !u!1 &1243743461
 GameObject:
   m_ObjectHideFlags: 0

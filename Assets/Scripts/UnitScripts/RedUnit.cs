@@ -4,18 +4,20 @@ public class RedUnit : MonoBehaviour, IUnit
 {
     private Transform enemytarget;
 
-    public RedInfo redInfo;
+    public UnitInfo unitInfo;
+    string UnitName;
     int HP;
     int SP;
     int attackPower;
     float attackSpeed;
-    public void Initialize(RedInfo info)
+    public void Initialize(UnitInfo info)
     {
-        redInfo = info;
-        HP = redInfo.HP;
-        SP = redInfo.SP;
-        attackPower = redInfo.Damage;
-        attackSpeed = redInfo.AttackSpeed;
+        unitInfo = info;
+        UnitName = unitInfo.UnitName;
+        HP = unitInfo.HP;
+        SP = unitInfo.SP;
+        attackPower = unitInfo.Damage;
+        attackSpeed = unitInfo.AttackSpeed;
     }
     public void Attack(Transform target)
     {

@@ -1,0 +1,182 @@
+@startuml Wildgolem
+title Wildgolem - UML Class Diagram
+left to right direction
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+skinparam classBackgroundColor #79CEEC
+skinparam classBorderColor #17212B
+skinparam ArrowColor #17212B
+hide circle
+
+class MonoBehaviour <<external>>
+class ScriptableObject <<external>>
+
+interface IUnit {
+  --
+  + Attack(target : Transform) : void
+  + takeDamage(damage : int) : void
+  + hpHeal(amount : int) : void
+  + spHeal(amount : int) : void
+}
+
+class PlayerAttack {
+  --
+  - Start() : void
+  - Update() : void
+}
+
+class PlayerInput {
+  + joystick : Joystick
+  + joystickInput : Vector3
+  + MoveInput : Vector3
+  + LookInput : Vector3
+  + JumpPressed : bool
+  + IsMovementEnabled : bool = true
+  --
+  + Update() : void
+  + OnMove(value : InputValue) : void
+  + DisableMovement() : void
+  + EnableMovement() : void
+}
+
+class PlayerMovement {
+  - playerInput : PlayerInput
+  - playerRigidbody : Rigidbody
+  - playerAnimator : Animator
+  - moveSpeed : float = 5
+  - defaultMoveSpeed : float
+  - isMoving : bool = false
+  + MoveSpeed : float {readOnly}
+  + DefaultMoveSpeed : float {readOnly}
+  --
+  - Awake() : void
+  - Update() : void
+  + SetMoveSpeed(speed : float) : void
+  + ResetMoveSpeed() : void
+}
+
+class PlayerDash {
+  - maxDashSpeed : float = 5
+  - accelerationTime : float = 2
+  - dashCount : int = 0
+  - playerMovement : PlayerMovement
+  - isDashButtonHeld : bool
+  --
+  - Awake() : void
+  + Dash() : void
+  + EndDash() : void
+  + ChargeDash() : IEnumerator
+}
+
+class PartyController1 {
+  - player : Transform
+  - members : Transform[]
+  - formationDistance : float = 1.5
+  - animationStopDelay : float = 0.1
+  - memberAnimators : Animator[]
+  - previousPlayerPosition : Vector3
+  - lastMoveDirection : Vector3
+  - lastMovementTime : float
+  --
+  - Awake() : void
+  - LateUpdate() : void
+  - KeepFormation() : void
+  - UpdateAnimations(isMoving : bool) : void
+}
+
+interface IUnit {
+  --
+  + Attack(target : Transform) : void
+  + takeDamage(damage : int) : void
+  + hpHeal(amount : int) : void
+  + spHeal(amount : int) : void
+}
+
+class RedUnit {
+  - enemytarget : Transform
+  + unitInfo : UnitInfo
+  - UnitName : string
+  - HP : int
+  - SP : int
+  - attackPower : int
+  - attackSpeed : float
+  --
+  + Initialize(info : UnitInfo) : void
+  + Attack(target : Transform) : void
+  + takeDamage(damage : int) : void
+  + hpHeal(amount : int) : void
+  + spHeal(amount : int) : void
+  - Start() : void
+  - Update() : void
+}
+
+class UnitInfo #F9C8D2 {
+  + UnitName : string = "New Unit"
+  + HP : int = 100
+  + SP : int = 50
+  + Damage : int = 10
+  + AttackSpeed : float = 1
+  --
+}
+
+class SceneChange {
+  --
+  - OnTriggerEnter(other : Collider) : void
+  - Start() : void
+  - Update() : void
+}
+
+class SceneChange1 {
+  --
+  + ChangeSceneToOne() : void
+  - Start() : void
+  - Update() : void
+}
+
+MonoBehaviour <|-- PlayerAttack
+MonoBehaviour <|-- PlayerInput
+MonoBehaviour <|-- PlayerMovement
+MonoBehaviour <|-- PlayerDash
+MonoBehaviour <|-- PartyController1
+MonoBehaviour <|-- RedUnit
+MonoBehaviour <|-- SceneChange
+MonoBehaviour <|-- SceneChange1
+ScriptableObject <|-- UnitInfo
+
+PlayerDash --> PlayerMovement : playerMovement
+PlayerMovement --> PlayerInput : playerInput
+PlayerAttack --> IPlayerAttack
+RedUnit --> UnitInfo : unitInfo
+RedUnit ..|> IUnit
+RedUnit ..> IUnit : Attack() / takeDamage()
+
+note bottom of PlayerInput
+  joystick를 제외한 공개 속성은
+  public get / private set입니다.
+end note
+note bottom of PartyController1
+  파일명: PartyController.cs
+  Transform과 Animator를 통해 파티원을 관리합니다.
+  정적 해시와 슬롯 방향 상수는 생략했습니다.
+end note
+note bottom of PlayerAttack
+  Start(), Update()는 빈 메서드입니다.
+  IPlayerAttack은 현재 코드에 없습니다.
+end note
+note bottom of SceneChange
+  Player 태그 충돌 시 SceneManager.LoadScene(0)
+end note
+note bottom of SceneChange1
+  ChangeSceneToOne()에서 SceneManager.LoadScene(1)
+end note
+
+legend bottom
+  + public / - private
+  --> 단방향 연관: 필드로 참조
+  ..> 의존: 메서드에서 사용
+  --|> 일반화: 클래스 상속
+  ..|> 실체화: 인터페이스 구현
+  LegacyScripts 제외. 씬 및 Inspector 연결은 미포함.
+endlegend
+@enduml

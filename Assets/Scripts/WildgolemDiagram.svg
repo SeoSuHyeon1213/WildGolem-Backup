@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="2220"
+   height="1470"
+   viewBox="0 0 2220 1470"
+   version="1.1"
+   id="svg110"
+   sodipodi:docname="WildgolemDiagram.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs110" />
+  <sodipodi:namedview
+     id="namedview110"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.6643707"
+     inkscape:cx="252.04721"
+     inkscape:cy="405.85909"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg110" />
+  <rect
+     width="100%"
+     height="100%"
+     fill="white"
+     id="rect1" />
+  <polyline
+     points="1700,1010 1830,1010"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     stroke-dasharray="8, 7"
+     id="polyline88-5"
+     transform="matrix(0,-0.78430727,1,0,-909.72207,1855.5221)" />
+  <polyline
+     points="1815.0,1002.0 1830,1010 1815.0,1018.0"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline89-2"
+     transform="rotate(-90,670.25887,1579.9809)" />
+  <text
+     x="223.41795"
+     y="481.31229"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="17px"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text91-6">«realize» IPlayerAttack 구현</text>
+  <text
+     x="50"
+     y="62"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="32"
+     font-weight="700"
+     text-anchor="start"
+     fill="#17212b"
+     id="text1">Wildgolem · 현재 스크립트 클래스 다이어그램</text>
+  <text
+     x="50"
+     y="103"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="19"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text2">사진의 배치·색상을 참고하여 실제 선언과 직접 참조를 표시했습니다.  |  2026-09-04</text>
+  <text
+     x="50"
+     y="139"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="17"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text3">+ public   - private   /   점선 화살표: 사용하는 클래스 → 사용 대상   /   빈 삼각형: 구현 클래스 → 인터페이스</text>
+  <rect
+     x="59.613243"
+     y="522.57935"
+     width="290"
+     height="226"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect3" />
+  <rect
+     x="57.967125"
+     y="198.37195"
+     width="290.03387"
+     height="218.38658"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="1.96614"
+     id="rect3-9" />
+  <text
+     x="69.688622"
+     y="337.90295"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="16px"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text13-4"><tspan
+       sodipodi:role="line"
+       id="tspan1"
+       x="69.688622"
+       y="337.90295">+ Attack(target : Transform) : void</tspan><tspan
+       sodipodi:role="line"
+       id="tspan2"
+       x="69.688622"
+       y="357.90295">+ takeDamage(damage : int) : void</tspan><tspan
+       sodipodi:role="line"
+       x="69.688622"
+       y="377.90295"
+       id="tspan3">+ hpHeal(amount : int) : void</tspan><tspan
+       sodipodi:role="line"
+       x="69.688622"
+       y="397.90295"
+       id="tspan4">+ spHeal(amount : int) : void</tspan><tspan
+       sodipodi:role="line"
+       x="69.688622"
+       y="417.90295"
+       id="tspan5" /></text>
+  <text
+     x="206.55045"
+     y="255.99203"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="24px"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text5-1">IPlayerAttack</text>
+  <text
+     x="205.08807"
+     y="224.47899"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="15px"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text45-5">«Interface»</text>
+  <polyline
+     points="440,302 770,302"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline11-8"
+     transform="matrix(0.8808788,0,0,1,-329.14614,12.870007)" />
+  <polyline
+     points="440,302 770,302"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline11-8-2"
+     transform="matrix(0.8808788,0,0,1,-329.64931,-26.617381)" />
+  <text
+     x="204.61324"
+     y="546.57935"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="15px"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text4">«MonoBehaviour»</text>
+  <text
+     x="204.61324"
+     y="579.57935"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="24px"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text5">PlayerAttack</text>
+  <polyline
+     points="50,302 340,302"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline5"
+     transform="translate(9.6132428,292.57932)" />
+  <polyline
+     points="50,342 340,342"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline6"
+     transform="translate(9.6132428,292.57932)" />
+  <text
+     x="73.613243"
+     y="660.57928"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="16px"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text6">- Start() : void</text>
+  <text
+     x="73.613243"
+     y="687.57928"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="16px"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text7">- Update() : void</text>
+  <text
+     x="73.613243"
+     y="733.57928"
+     font-family="'Malgun Gothic', sans-serif"
+     font-size="15px"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text8">현재 메서드 본문은 비어 있음</text>
+  <rect
+     x="440"
+     y="230"
+     width="330"
+     height="386"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect9" />
+  <text
+     x="605.0"
+     y="254"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text10">«MonoBehaviour»</text>
+  <text
+     x="605.0"
+     y="287"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text11">PlayerInput</text>
+  <polyline
+     points="440,302 770,302"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline11" />
+  <text
+     x="454"
+     y="328"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text12">+ joystick : Joystick</text>
+  <text
+     x="454"
+     y="355"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text13">+ joystickInput : Vector3 {get;}</text>
+  <text
+     x="454"
+     y="382"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text14">+ MoveInput : Vector3 {get;}</text>
+  <text
+     x="454"
+     y="409"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text15">+ LookInput : Vector3 {get;}</text>
+  <text
+     x="454"
+     y="436"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text16">+ JumpPressed : bool {get;}</text>
+  <text
+     x="454"
+     y="463"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text17">+ IsMovementEnabled : bool {get;}</text>
+  <polyline
+     points="440,486 770,486"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline17" />
+  <text
+     x="454"
+     y="512"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text18">+ Update() : void</text>
+  <text
+     x="454"
+     y="539"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text19">+ OnMove(value : InputValue) : void</text>
+  <text
+     x="454"
+     y="566"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text20">+ DisableMovement() : void</text>
+  <text
+     x="454"
+     y="593"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text21">+ EnableMovement() : void</text>
+  <rect
+     x="900"
+     y="230"
+     width="340"
+     height="386"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect21" />
+  <text
+     x="1070.0"
+     y="254"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text22">«MonoBehaviour»</text>
+  <text
+     x="1070.0"
+     y="287"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text23">PlayerMovement</text>
+  <polyline
+     points="900,302 1240,302"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline23" />
+  <text
+     x="914"
+     y="328"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text24">- playerInput : PlayerInput</text>
+  <text
+     x="914"
+     y="355"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text25">- playerRigidbody : Rigidbody</text>
+  <text
+     x="914"
+     y="382"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text26">- playerAnimator : Animator</text>
+  <text
+     x="914"
+     y="409"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text27">- moveSpeed : float = 5</text>
+  <text
+     x="914"
+     y="436"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text28">- defaultMoveSpeed : float</text>
+  <text
+     x="914"
+     y="463"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text29">+ MoveSpeed : float {get;}</text>
+  <text
+     x="914"
+     y="490"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text30">+ DefaultMoveSpeed : float {get;}</text>
+  <polyline
+     points="900,513 1240,513"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline30" />
+  <text
+     x="914"
+     y="539"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text31">- Awake() / Update() : void</text>
+  <text
+     x="914"
+     y="566"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text32">+ SetMoveSpeed(speed : float) : void</text>
+  <text
+     x="914"
+     y="593"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text33">+ ResetMoveSpeed() : void</text>
+  <rect
+     x="1370"
+     y="230"
+     width="330"
+     height="359"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect33" />
+  <text
+     x="1535.0"
+     y="254"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text34">«MonoBehaviour»</text>
+  <text
+     x="1535.0"
+     y="287"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text35">PlayerDash</text>
+  <polyline
+     points="1370,302 1700,302"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline35" />
+  <text
+     x="1384"
+     y="328"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text36">- playerMovement : PlayerMovement</text>
+  <text
+     x="1384"
+     y="355"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text37">- maxDashSpeed : float = 5</text>
+  <text
+     x="1384"
+     y="382"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text38">- accelerationTime : float = 2</text>
+  <text
+     x="1384"
+     y="409"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text39">- dashCount : int = 0</text>
+  <text
+     x="1384"
+     y="436"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text40">- isDashButtonHeld : bool</text>
+  <polyline
+     points="1370,459 1700,459"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline40" />
+  <text
+     x="1384"
+     y="485"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text41">- Awake() : void</text>
+  <text
+     x="1384"
+     y="512"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text42">+ Dash() : void</text>
+  <text
+     x="1384"
+     y="539"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text43">+ EndDash() : void</text>
+  <text
+     x="1384"
+     y="566"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text44">+ ChargeDash() : IEnumerator</text>
+  <rect
+     x="1830"
+     y="380"
+     width="340"
+     height="242"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect44" />
+  <text
+     x="2000.0"
+     y="404"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text45">«Interface»</text>
+  <text
+     x="2000.0"
+     y="437"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text46">IUnit</text>
+  <polyline
+     points="1830,452 2170,452"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline46" />
+  <polyline
+     points="1830,492 2170,492"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline47" />
+  <text
+     x="1844"
+     y="518"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text47">+ Attack(target : Transform) : void</text>
+  <text
+     x="1844"
+     y="545"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text48">+ takeDamage(damage : int) : void</text>
+  <text
+     x="1844"
+     y="572"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text49">+ hpHeal(amount : int) : void</text>
+  <text
+     x="1844"
+     y="599"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text50">+ spHeal(amount : int) : void</text>
+  <polyline
+     points="900,425 770,425"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     stroke-dasharray="8 7"
+     id="polyline50" />
+  <polyline
+     points="785.0,433.0 770,425 785.0,417.0"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline51" />
+  <text
+     x="835"
+     y="382"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="17"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text51">«use»</text>
+  <text
+     x="835"
+     y="409"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text52">입력 읽기</text>
+  <polyline
+     points="1370,425 1240,425"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     stroke-dasharray="8 7"
+     id="polyline52" />
+  <polyline
+     points="1255.0,433.0 1240,425 1255.0,417.0"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline53" />
+  <text
+     x="1305"
+     y="382"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="17"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text53">«use»</text>
+  <text
+     x="1305"
+     y="409"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text54">속도 변경</text>
+  <rect
+     x="900"
+     y="840"
+     width="340"
+     height="424"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect54" />
+  <text
+     x="1070.0"
+     y="864"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text55">«MonoBehaviour»</text>
+  <text
+     x="1070.0"
+     y="897"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text56">PartyController1</text>
+  <polyline
+     points="900,912 1240,912"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline56" />
+  <text
+     x="914"
+     y="938"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text57">- player : Transform</text>
+  <text
+     x="914"
+     y="965"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text58">- members : Transform[8]</text>
+  <text
+     x="914"
+     y="992"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text59">- formationDistance : float = 1.5</text>
+  <text
+     x="914"
+     y="1019"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text60">- animationStopDelay : float = 0.1</text>
+  <text
+     x="914"
+     y="1046"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text61">- memberAnimators : Animator[]</text>
+  <text
+     x="914"
+     y="1073"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text62">- previousPlayerPosition : Vector3</text>
+  <text
+     x="914"
+     y="1100"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text63">- lastMoveDirection : Vector3</text>
+  <polyline
+     points="900,1123 1240,1123"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline63" />
+  <text
+     x="914"
+     y="1149"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text64">- Awake() / LateUpdate() : void</text>
+  <text
+     x="914"
+     y="1176"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text65">- KeepFormation() : void</text>
+  <text
+     x="914"
+     y="1203"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text66">- UpdateAnimations(isMoving : bool)</text>
+  <text
+     x="914"
+     y="1249"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text67">파일명: PartyController.cs</text>
+  <rect
+     x="1370"
+     y="840"
+     width="330"
+     height="413"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect67" />
+  <text
+     x="1535.0"
+     y="864"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text68">«MonoBehaviour»</text>
+  <text
+     x="1535.0"
+     y="897"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text69">RedUnit</text>
+  <polyline
+     points="1370,912 1700,912"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline69" />
+  <text
+     x="1384"
+     y="938"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text70">+ unitInfo : UnitInfo</text>
+  <text
+     x="1384"
+     y="965"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text71">- enemytarget : Transform</text>
+  <text
+     x="1384"
+     y="992"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text72">- UnitName : string</text>
+  <text
+     x="1384"
+     y="1019"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text73">- HP / SP / attackPower : int</text>
+  <text
+     x="1384"
+     y="1046"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text74">- attackSpeed : float</text>
+  <polyline
+     points="1370,1069 1700,1069"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline74" />
+  <text
+     x="1384"
+     y="1095"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text75">+ Initialize(info : UnitInfo) : void</text>
+  <text
+     x="1384"
+     y="1122"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text76">+ Attack(target : Transform) : void</text>
+  <text
+     x="1384"
+     y="1149"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text77">+ takeDamage(damage : int) : void</text>
+  <text
+     x="1384"
+     y="1176"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text78">+ hpHeal(amount : int) : void</text>
+  <text
+     x="1384"
+     y="1203"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text79">+ spHeal(amount : int) : void</text>
+  <text
+     x="1384"
+     y="1230"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text80">- Start() / Update() : void</text>
+  <rect
+     x="1830"
+     y="840"
+     width="340"
+     height="315"
+     fill="#f9c8d2"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect80" />
+  <text
+     x="2000.0"
+     y="864"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text81">«ScriptableObject»</text>
+  <text
+     x="2000.0"
+     y="897"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text82">UnitInfo</text>
+  <polyline
+     points="1830,912 2170,912"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline82" />
+  <text
+     x="1844"
+     y="938"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text83">+ UnitName : string = &quot;New Unit&quot;</text>
+  <text
+     x="1844"
+     y="965"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text84">+ HP : int = 100</text>
+  <text
+     x="1844"
+     y="992"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text85">+ SP : int = 50</text>
+  <text
+     x="1844"
+     y="1019"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text86">+ Damage : int = 10</text>
+  <text
+     x="1844"
+     y="1046"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text87">+ AttackSpeed : float = 1</text>
+  <polyline
+     points="1830,1069 2170,1069"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline87" />
+  <text
+     x="1844"
+     y="1140"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text88">[CreateAssetMenu]</text>
+  <polyline
+     points="1700,1010 1830,1010"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     stroke-dasharray="8 7"
+     id="polyline88" />
+  <polyline
+     points="1815.0,1002.0 1830,1010 1815.0,1018.0"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline89" />
+  <text
+     x="1765"
+     y="962"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="17"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text89">«use»</text>
+  <text
+     x="1765"
+     y="990"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text90">능력치 읽기</text>
+  <polyline
+     points="1580,840 1580,742 1985,742 1985,622"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     stroke-dasharray="8 7"
+     id="polyline90" />
+  <polyline
+     points="1974.0,643.0 1985,622 1996.0,643.0 1974.0,643.0"
+     fill="white"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline91" />
+  <text
+     x="1760"
+     y="723"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="17"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text91">«realize» IUnit 구현</text>
+  <text
+     x="1830"
+     y="1176"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text92">Attack()은 대상의 IUnit을 찾아</text>
+  <text
+     x="1830"
+     y="1203"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text93">takeDamage(attackPower)를 호출함.</text>
+  <text
+     x="50"
+     y="801"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="21"
+     font-weight="700"
+     text-anchor="start"
+     fill="#17212b"
+     id="text94">씬 전환</text>
+  <rect
+     x="50"
+     y="840"
+     width="320"
+     height="199"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect94" />
+  <text
+     x="210.0"
+     y="864"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text95">«MonoBehaviour»</text>
+  <text
+     x="210.0"
+     y="897"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text96">SceneChange</text>
+  <polyline
+     points="50,912 370,912"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline96" />
+  <polyline
+     points="50,952 370,952"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline97" />
+  <text
+     x="64"
+     y="978"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text97">- OnTriggerEnter(other : Collider)</text>
+  <text
+     x="64"
+     y="1024"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text98">Player 태그 충돌 → LoadScene(0)</text>
+  <rect
+     x="440"
+     y="840"
+     width="330"
+     height="199"
+     fill="#79ceec"
+     stroke="#17212b"
+     stroke-width="2"
+     id="rect98" />
+  <text
+     x="605.0"
+     y="864"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text99">«MonoBehaviour»</text>
+  <text
+     x="605.0"
+     y="897"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="24"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#17212b"
+     id="text100">SceneChange1</text>
+  <polyline
+     points="440,912 770,912"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline100" />
+  <polyline
+     points="440,952 770,952"
+     fill="none"
+     stroke="#17212b"
+     stroke-width="2"
+     id="polyline101" />
+  <text
+     x="454"
+     y="978"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="16"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text101">+ ChangeSceneToOne() : void</text>
+  <text
+     x="454"
+     y="1024"
+     font-family="Malgun Gothic, sans-serif"
+     font-size="15"
+     font-weight="400"
+     text-anchor="start"
+     fill="#17212b"
+     id="text102">호출 시 → LoadScene(1)</text>
+</svg>
