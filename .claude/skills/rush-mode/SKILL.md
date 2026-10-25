@@ -6,11 +6,11 @@ description: 와일드 골렘의 질주 모드(발동 게이지, 일시 강화 �
 # 질주 모드 작업 스킬
 
 ## 목적
-[README.md](../../../README.md) 8~9장의 질주 모드를 기존 코드 구조에 맞게 단계적으로 구현하고, 진행과 검증 결과를 [CHECKLIST.md](../../../CHECKLIST.md)에 남긴다.
+[README.md](../../../README.md) 8~9장의 질주 모드를 기존 코드 구조에 맞게 단계적으로 구현하고, 진행과 검증 결과를 [Assets/Scripts/tools/CHECKLIST.md](../../../Assets/Scripts/tools/CHECKLIST.md)에 남긴다.
 
 ## 시작할 때
-1. [CLAUDE.md](../../../CLAUDE.md)를 읽는다. 특히 6장 "주의 사항".
-2. CHECKLIST.md의 "질주 모드" 섹션에서 현재 단계, 미결정 사항, 다음 할 일을 확인한다.
+1. [Assets/Scripts/tools/CLAUDE.md](../../../Assets/Scripts/tools/CLAUDE.md)를 읽는다. 특히 6장 "주의 사항".
+2. [Assets/Scripts/tools/CHECKLIST.md](../../../Assets/Scripts/tools/CHECKLIST.md)의 "질주 모드" 섹션에서 현재 단계, 미결정 사항, 다음 할 일을 확인한다.
 3. 관련 파일의 실제 상태를 확인한다: `PlayerScripts/PlayerDash.cs`, `PlayerMovement.cs`, `PlayerInput.cs`, `PartyController.cs`, `EnemyScripts/EnemyCotroller.cs`, `UnitScripts/LivingEntity.cs`, `Interface/*`.
 4. `git status`로 사용자의 미커밋 변경을 확인한다.
 

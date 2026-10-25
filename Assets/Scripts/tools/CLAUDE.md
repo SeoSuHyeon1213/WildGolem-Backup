@@ -1,6 +1,6 @@
 # CLAUDE.md — 와일드 골렘 (Wild Golem)
 
-이 저장소에서 작업할 때 따르는 지침이다. 기획 원문은 [README.md](README.md)(간단 기획서)이며, 기획과 코드가 다르면 임의로 맞추지 말고 차이를 기록한 뒤 사용자에게 확인한다.
+이 저장소에서 작업할 때 따르는 지침이다. 기획 원문은 [README.md](../../../README.md)(간단 기획서)이며, 기획과 코드가 다르면 임의로 맞추지 말고 차이를 기록한 뒤 사용자에게 확인한다.
 
 ## 1. 게임 요약 (기획서 기준)
 - 장르: 방치형 거점 성장 + 로그라이트 액션 RPG
@@ -11,7 +11,7 @@
 - 질주 관련 로그라이트 강화: 폭주 코어(처치 시 게이지 추가), 중량 강화(속도↓ 충돌 피해↑), 연쇄 파쇄(적을 적/벽에 충돌 시 추가 피해), 흡혈 엔진(질주 중 처치 시 회복)
 - 질주 관련 시너지: RED 다수(넉백·근접 강화), RED+BLUE(돌진 중 경직 저항), RED+GREEN(처치 시 이동 속도 증가)
 
-질주 모드 작업 절차는 [.claude/skills/rush-mode/SKILL.md](.claude/skills/rush-mode/SKILL.md), 진행 상태는 [CHECKLIST.md](CHECKLIST.md)를 본다.
+질주 모드 작업 절차는 [.claude/skills/rush-mode/SKILL.md](../../../.claude/skills/rush-mode/SKILL.md), 진행 상태는 [Assets/Scripts/tools/CHECKLIST.md](CHECKLIST.md)를 본다.
 
 ## 2. 기술 환경 (설정 파일에서 확인)
 | 항목 | 값 | 근거 |
@@ -33,7 +33,7 @@
 | Assets/ScriptableObject/CSharp | ScriptableObject 정의(UnitInfo) |
 | Assets/Scenes | Intro, LobbyScene, BattleScene |
 | Assets/Downloded | 외부 에셋(Joystick Pack 등). 직접 수정하지 않는다 |
-| Assets/Scripts/tools | 범용 작업 지침 템플릿(AGENTS.md, CHECKLIST.md, SKILL.md) |
+| Assets/Scripts/tools | 프로젝트 지침(CLAUDE.md, 루트 CLAUDE.md가 import), 작업 체크리스트(CHECKLIST.md), 범용 템플릿(AGENTS.md, SKILL.md) |
 
 저장소 루트의 `*CommandBuffer.cs` 파일들은 Assets 밖에 있어 컴파일 대상이 아니다. 용도가 확인되지 않았으므로 건드리지 않는다.
 
@@ -63,5 +63,5 @@
 - 작업 전 `git status`와 관련 diff를 확인하고, 사용자 변경을 되돌리거나 덮어쓰지 않는다.
 - 요청 범위 밖의 리팩터링·포맷 변경·파일 이동을 하지 않는다.
 - 기획서에 수치가 없는 값(게이지 최대치, 지속 시간, 배율 등)은 임의로 확정하지 않는다. 임시값은 인스펙터 조정값으로 두고 "임시값"이라고 표시한다.
-- 여러 단계 작업은 [CHECKLIST.md](CHECKLIST.md)에 진행 상황과 검증 결과를 갱신한다.
+- 여러 단계 작업은 [Assets/Scripts/tools/CHECKLIST.md](CHECKLIST.md)에 진행 상황과 검증 결과를 갱신한다.
 - 커밋·푸시는 요청받았을 때만 한다.

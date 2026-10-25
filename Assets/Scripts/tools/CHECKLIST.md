@@ -10,7 +10,7 @@
 
 # 질주 모드
 
-작업 절차: [.claude/skills/rush-mode/SKILL.md](.claude/skills/rush-mode/SKILL.md) · 기획 원문: [README.md](README.md) 8~9장
+작업 절차: [.claude/skills/rush-mode/SKILL.md](../../../.claude/skills/rush-mode/SKILL.md) · 기획 원문: [README.md](../../../README.md) 8~9장
 
 ## 목표와 범위
 - 목표: 게이지가 가득 차면 버튼으로 일직선 돌격을 시작하고, 적·벽 충돌 시 게이지를 소모하며 공격하는 질주 모드를 구현한다.
