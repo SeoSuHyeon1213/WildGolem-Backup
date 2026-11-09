@@ -27,6 +27,7 @@
 |---|---|
 | Assets/Scripts/PlayerScripts | 플레이어 입력·이동·질주(PlayerDash)·공격·파티 대형 |
 | Assets/Scripts/UnitScripts | LivingEntity(체력/사망 기반 클래스), 골렘 유닛(RedUnit) |
+| Assets/Scripts/LobbyScripts | 방치형 거점(LobbyScene): 저장(SaveSystem)·규칙(LobbyState)·지점(LobbySite)·UI(LobbyUI). 조정값 에셋은 Assets/ScriptableObject/Lobby, 자리표시 배치 메뉴는 Assets/Editor/LobbySceneBuilder.cs |
 | Assets/Scripts/EnemyScripts | 적 AI(EnemyCotroller, NavMeshAgent 추적) |
 | Assets/Scripts/Interface | IUnit, IEnemy, IDamageable |
 | Assets/Scripts/LegacyScripts | 이전 구현(대부분 주석 처리). 참고용, 새 코드에서 의존하지 않는다 |

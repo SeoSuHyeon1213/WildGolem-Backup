@@ -42,7 +42,7 @@
 - [x] CLAUDE.md와 기획서(README.md)를 확인했다.
 - [x] 관련 코드 상태를 확인했다.
 - [x] 작업 직전 `git status`로 미커밋 변경을 확인했다. (스크립트 미커밋 변경 없음)
-- 참고: PlayerDash는 현재 LobbyScene에만 배치되어 있다(Button OnClick → `Dash`). BattleScene에는 없다.
+- 참고: PlayerDash는 현재 `Assets/Scenes/DashTest.unity`에만 배치되어 있다(Button OnClick → `Dash`). 2026-11-09 로비 거점 작업으로 LobbyScene에서 시험 오브젝트와 함께 옮겼다. BattleScene에는 없다. 질주 Play 확인은 DashTest 씬에서 한다.
 - 참고: 현재 씬·프리팹에 EnemyCotroller가 배치된 곳이 없다. 적 충돌 확인에는 적 오브젝트(Collider + EnemyCotroller + NavMeshAgent) 배치가 필요하다.
 
 ## 2. 실행
@@ -250,3 +250,133 @@
 - [x] 7방향 idle·walk 전환 코드(2026-11-09, 사용자 요청): GolemMotionAnimator가 대기·걷기 상태를 직접 고른다. Player·파티원은 PlayerMovement의 입력 기준 이동 방향(IsMoving·LastMoveDirection)을, 그 밖의 골렘은 위치 변화를 쓴다(벽에 밀리는 움직임으로 방향이 흔들리던 문제 때문). 공격·피격은 끝까지 재생 후 대기·걷기로 복귀, 걷는 중 방향 전환은 재생 진행도 유지. 상태가 없는 골렘은 기존 isMoving·isLeft 전환 유지. PlayerMovement.Awake에서 GolemMotionAnimator를 없으면 붙인다(RedUnit과 같은 방식).
 - [x] Play 확인(CLI, SetForcedDirection으로 8방향 이동): Player·RED 모두 walk_<방향>, 멈추면 idle_<같은 방향>, 정뒤(180°)는 back_right. RED attack_right → idle_right 복귀, hit_* 재생 확인. 컴파일 오류 0. 화면 캡처로 12px 표시 확인.
 - [ ] 사용자 확인: 조이스틱으로 직접 조작했을 때 느낌(사용자 확인 필요)
+
+# 로비씬 방치형 거점 설계 (2026-11-09)
+- 목표: LobbyScene을 방치형 거점으로 만든다(방치 재화 누적·수령 → 건물 업그레이드 → 골렘 관리·편성 → 원정 출발·귀환). 기획 원문: [README.md](../README.md) 3·4·6·7장.
+- 레퍼런스: AFK: 새로운 여정 — 장르·구조·메커니즘만 참고한다(오프라인 보상 상한 누적·한 번에 수령, 월드 안 건물 상호작용, 골렘 육성, 속성 조합 편성). 이름·캐릭터·그림·UI 모양은 쓰지 않는다.
+- 상태: **0~4단계 구현·Play 확인 완료(2026-11-09). 5단계(원정 연결)·6단계(그림) 남음. 커밋 안 함.** L-10~L-12 미확정(임시 규칙으로 구현).
+
+## 현재 상태 (파일 기준 확인, 에디터 미실행)
+- LobbyScene = 이동·질주 시험 공간: Player(PlayerInput·PlayerMovement·PlayerDash·PartyController), RED 프리팹 2기, Floating Joystick, 질주 Button, 벽(w ×4, wall)·Cube·Capsule, CinemachineCamera, NavMesh.
+- 거점 시스템(저장·재화·건물·편성) 코드는 없다. 씬 전환: Intro 버튼 → 빌드 인덱스 1(LobbyScene, `SceneChange1`), BattleScene 트리거 → 인덱스 0(Intro, `SceneChange`).
+- 골렘 데이터: `UnitInfo`(이름·HP·SP·Damage·AttackSpeed)만 있다. 속성(RED/GREEN/BLUE) 필드는 없다.
+
+## 확정 사항 (사용자 결정, 2026-11-09)
+- [x] L-1. 화면 = 걸어다니는 3D 거점. 기존 조이스틱 이동·카메라를 쓰고, 건물에 다가가거나 탭하면 패널이 열린다. 원정은 거점 출구(게이트)에서 출발한다.
+- [x] L-2. 방치 재화 출처 = 생산 건물(채석장·제련소) 레벨 + 점령 지역 수 보너스.
+- [x] L-3. 첫 구현 재화 = 목재·석재·금속 3종. 마력 정수·특수 건축 재료는 종류만 정의하고 이후 원정 전리품으로 지급한다.
+- [x] L-4. 질주 시험 오브젝트(벽·캡슐·질주 버튼·RED 2기)는 시험 전용 씬(예: DashTest)으로 옮긴다. 이동은 에디터에서 한다(씬 텍스트 편집 금지).
+
+- [x] L-5. 목재 = 거점 안의 작은 숲 지역. 플레이어가 직접 벌목하거나, 골렘을 숲에 배정해 방치 중에도 목재를 얻는다.
+- [x] L-6. 수치는 임시값으로 만든다(아래 "임시값" 표). 모두 ScriptableObject 인스펙터 조정값이다.
+- [x] L-7. 편성 = 플레이어 주변 8방향 슬롯에 방향마다 1명. 일반 원정은 플레이어 포함 최대 6명(골렘 5), 이후 보스 레이드 같은 콘텐츠는 최대 9명(8방향 모두)까지 늘릴 수 있게 한다. 기존 `PartyController1`의 8방향 슬롯(`SlotDirections`, 0=앞부터 시계 방향)을 그대로 쓴다.
+- [x] L-8. 골렘 강화 = 연구로 레벨 상한 해금 + 골렘 레벨업 재화 소비를 함께 쓴다.
+- [x] L-9. 거점 건물은 도형 자리표시로 시작한다(우편함 그림 요청은 나중에).
+
+## 미결정 사항 (사용자 확인 필요)
+- [ ] L-10. 숲에 배정한 골렘을 원정 편성에도 넣을 수 있는가 (기본안: 배정 중에는 편성 불가, 편성하면 배정 해제)
+- [ ] L-11. 골렘 레벨업 재화 종류 (임시: 금속. 기획서상 후보는 마력 정수 — 원정 전리품 연결 후 바꿀 수 있음)
+- [ ] L-12. 시너지 효과 수치(README 7장 표의 효과량) — 4단계 때 임시값으로 둔다
+
+## 임시값 (L-6, 모두 "임시값" 표시, 인스펙터 조정)
+| 항목 | 임시값 |
+|---|---|
+| 오프라인 누적 상한 | 12시간 |
+| 채석장 Lv1 석재 생산 | 60/시간, 레벨당 +30 |
+| 제련소 Lv1 금속 생산 | 30/시간, 레벨당 +15 |
+| 숲 배정 골렘 1기 목재 | 20/시간, 숲 배정 칸 3 |
+| 직접 벌목 | 나무 1그루 타격당 목재 5, 3회에 쓰러짐, 30초 뒤 다시 자람 |
+| 점령 지역 보너스 | 지역 1곳당 생산량 +5% |
+| 건물 최대 레벨 | 10 |
+| 업그레이드 비용 | 기본 비용 × 1.5^(현재 레벨−1). 채석장 기본: 목재 50·금속 20, 제련소 기본: 목재 50·석재 50 |
+| 시작 재화 | 목재 100·석재 100·금속 50 |
+| 연구 1단계당 골렘 레벨 상한 | +10 (시작 상한 10) |
+| 골렘 레벨업 비용 | 금속 10 × 현재 레벨 |
+
+## 화면 구조 (안)
+- 거점 맵(3D): 폐허 거점 위에 건물 부지. 부지마다 `BuildingSite`(트리거 + 탭) → 건물 패널(레벨·효과·업그레이드 비용·버튼). 미해금 부지는 잠금 표시.
+- 상단 HUD: 목재·석재·금속 보유량.
+- 방치 보상 상자(거점 중앙 오브젝트 + HUD 버튼): 누적량·누적 시간/상한 표시, 탭하면 수령.
+- 숲 지역: 나무(자리표시 원기둥)에 다가가 공격/탭하면 직접 벌목. 숲 입구의 배정 패널에서 골렘을 배정하면 방치 목재 생산.
+- 골렘 패널(훈련소/연구소에서 열기): 보유 골렘 목록·정보·레벨업. 연구소 패널: 레벨 상한 연구.
+- 편성 패널(게이트에서 열기): 플레이어를 가운데 둔 8방향 슬롯 그림에 골렘 배치(최대 인원 표시), 속성 시너지·인원 편성(1인/2인/다인) 미리보기 → 원정 출발.
+- 귀환 시: 전리품 결과 패널 → 재화 반영.
+
+## 시스템 목록 (안)
+| 시스템 | 역할 |
+|---|---|
+| `SaveSystem` | JSON 저장/불러오기(`Application.persistentDataPath`). 재화·건물 레벨·골렘·편성·점령 지역·마지막 수령 시각 |
+| `ResourceWallet` | 재화 보유·증감·지불 가능 확인, 변경 이벤트 |
+| `IdleProduction` | (생산 건물 레벨 생산량 + 숲 배정 골렘 생산량) × (1 + 점령 보너스). 마지막 수령 시각부터 상한까지 누적, 수령 시 지갑에 반영 |
+| `ForestArea` / `Tree` | 직접 벌목(타격 횟수·재생 시간), 숲 배정 칸 관리 |
+| `BuildingSystem` | 건물 정의·레벨·업그레이드(비용 지불 → 레벨 +1 → 효과·해금 갱신) |
+| `GolemRoster` | 보유 골렘·레벨·레벨업(연구 상한 이내, 재화 소비) |
+| `ResearchSystem` | 연구 단계 → 골렘 레벨 상한 |
+| `PartyFormation` | 8방향 슬롯(인덱스 0~7)에 골렘 id, 콘텐츠별 최대 인원(일반 6·레이드 9), 속성 집계, 시너지 미리보기 |
+| `ExpeditionSession` | 씬 전환 사이에 편성 → BattleScene, 전리품·점령 결과 → LobbyScene 전달 |
+| 거점 UI | HUD, 건물·골렘·편성·결과 패널(uGUI, 기존 Canvas 방식) |
+
+## 데이터 구조 초안
+```csharp
+enum ResourceType { Wood, Stone, Metal, ManaEssence, SpecialMaterial }
+enum GolemElement { Red, Green, Blue }
+
+// ScriptableObject (수치는 임시값)
+BuildingDefinition { string id; string displayName; BuildingLevel[] levels; }
+BuildingLevel { ResourceAmount[] upgradeCost; ResourceAmount[] productionPerHour; string[] unlocks; }
+IdleConfig { float maxOfflineHours; float bonusPerConqueredRegion; }
+ForestConfig { int assignSlots; float woodPerGolemPerHour; int woodPerHit; int hitsPerTree; float regrowSeconds; }
+FormationRule { string contentId; int maxMembersIncludingPlayer; }  // normal = 6, raid = 9
+ResearchDefinition { int baseLevelCap; int levelCapPerStep; ResourceAmount[] stepCosts; }
+GolemDefinition { string id; UnitInfo baseStats; GolemElement element; ResourceType levelUpCurrency; }  // UnitInfo 재사용
+
+// 저장 데이터 (JSON)
+SaveData {
+  long lastClaimUnixTime;
+  List<ResourceAmount> resources;
+  List<BuildingState> buildings;   // { id, level }
+  List<GolemState> golems;         // { id, level }
+  string[] partySlots = new string[8];  // 방향 슬롯별 골렘 id (빈 칸 = null), PartyController1.SlotDirections 순서
+  List<string> forestAssigned;     // 숲 배정 골렘 id
+  int researchStep;
+  List<string> conqueredRegions;
+}
+```
+- 시간은 UTC Unix 시각으로 저장한다. 기기 시계를 되돌리면 누적을 0으로 처리한다(음수 경과 방지). 서버 시각 검증은 범위 밖.
+
+## 구현 단계 (사용자 승인 2026-11-09 "시작해")
+- [x] 0. 질주 시험 오브젝트 분리(CLI script eval): LobbyScene을 `Assets/Scenes/DashTest.unity`로 복사(질주 시험 구성 그대로 보존), LobbyScene에서 wall·Capsule ×3·Cube ×4·질주 Button·RedUnit과 Player의 PlayerDash 컴포넌트를 제거 후 저장. DashTest를 빌드 목록 4번째(인덱스 3)에 추가해 기존 인덱스(Intro 0·Lobby 1·Battle 2)는 그대로.
+- [x] 1. 데이터·저장: `Assets/Scripts/LobbyScripts/LobbyTypes.cs`(enum·SaveData), `SaveSystem.cs`(JSON, 임시 파일 후 교체), `LobbyState.cs`(규칙 전체, MonoBehaviour 아님), `LobbyManager.cs`(불러오기·변경 시 저장·일시정지/종료 시 저장). SO: `BuildingDefinition`·`GolemDefinition`·`LobbyConfig`(Assets/ScriptableObject/CSharp), 에셋은 `Assets/ScriptableObject/Lobby/`.
+- [x] 2. 방치 누적·수령 + HUD: 상단 재화, 오른쪽 위 방치 보상 버튼(누적 시간/상한·받을 양, 가득 차면 주황), 상자 패널에서 수령.
+- [x] 3. 건물: 채석장·제련소 업그레이드, 대장간·수용소·성벽은 잠금("준비 중"). 지점에 다가가면 오른쪽 아래 "○○ 열기" 버튼 → 패널.
+- [x] 3-1. 숲: 나무 4그루 직접 벌목(3타에 쓰러짐, 30초 뒤 재생) + 숲 작업장 표지판에서 골렘 배정/해제.
+- [x] 4. 훈련소(골렘 레벨업), 연구소(레벨 상한 연구), 원정 게이트(콘텐츠 일반/레이드 전환, 8방향 슬롯 순환, 인원·시너지 미리보기).
+  - 편성은 저장만 한다. 로비의 PartyController1에 골렘을 실제로 세우는 것은 5단계에서 원정 연결과 함께 한다.
+- [ ] 5. 원정 출발·귀환 연결(ExpeditionSession). 게이트의 "원정 출발" 버튼은 비활성 자리표시. 원정 런 구조는 BattleScene 작업과 함께 정한다
+- [ ] 6. 건물 그림·연출: 자리표시로 시작, 그림은 이후 우편함 절차
+- 각 단계: 컴파일(Unity CLI Console) → Play 확인 → 이 섹션 갱신. 실행하지 않은 검증은 미실행으로 기록한다.
+
+## 구현 중 정한 것 (설계 초안과 달라진 점)
+- 건물 레벨별 배열 대신 공식(기본값 + 레벨당 증가, 비용 × 1.5^(레벨-1))으로 정의했다. 수치는 모두 임시값, `Building_*.asset`에서 조정.
+- 연구소·훈련소·게이트·숲 표지판은 건물 정의가 아니라 상호작용 지점 종류(LobbySiteKind)다. 연구소 자체 레벨은 없다.
+- 시작 보유 골렘: RED·GREEN·BLUE 3기(임시값, 편성·시너지 시험용. `Golem_*.asset`의 ownedAtStart). 플레이어(와일드골렘)는 속성 없음으로 보고 시너지 집계에서 뺐다.
+- "다수" 시너지 기준: 같은 속성 2기 이상(임시값). 효과는 이름만 표시(L-12).
+- 숲 배정 골렘은 편성 불가, 편성 중 골렘을 배정하면 편성에서 빠진다(L-10 기본안, 미확정).
+- UI: 실행 중 코드로 만드는 uGUI(`LobbyUI`). 프로젝트에 한글 TMP 글꼴이 없어 레거시 Text + OS 글꼴(맑은 고딕 등)을 동적으로 쓴다 — 모바일 등에서 글꼴이 달라질 수 있어 정식 글꼴 결정 필요.
+- 자리표시 배치: 메뉴 `Tools/Wild Golem/로비 거점 자리표시 배치`(`Assets/Editor/LobbySceneBuilder.cs`). 다시 실행하면 씬의 LobbyBase를 새로 만들고, 조정값 에셋은 이미 있으면 그대로 둔다. 바닥 밖으로 나가지 않게 보이지 않는 경계 벽을 둔다.
+- 시험 메뉴: LobbyManager 컴포넌트 우클릭 → "시험: 1시간 경과 / 13시간 경과 / 점령 지역 +1 / 재화 +1000 / 저장 초기화".
+- 저장 위치: `%USERPROFILE%/AppData/LocalLow/DefaultCompany/WildGolem/wildgolem_save.json`. 시험 후 지워 두었다(다음 Play는 새 데이터로 시작).
+
+## 검증 기록
+| 확인 항목 | 명령 또는 방법 | 결과 | 비고 |
+|---|---|---|---|
+| 컴파일 | `unity recompile` | 통과 (오류 0·경고 0) | FindFirstObjectByType 경고 1건 수정 후 |
+| 자리표시 배치 메뉴 | CLI로 메뉴 실행 | 통과 | 바닥 18.6×18.6, 지점 14개, Console 오류 0 |
+| 규칙 29개 | Play 중 script eval로 LobbyState 직접 호출 | 통과 29/29 | 시작 재화·1시간 누적(석재60·금속30)·수령·13시간→12시간 상한(석재720)·업그레이드 비용/레벨/생산량·1.5배 비용·잠금·재화 부족·숲 배정 생산·배정 중 편성 불가·슬롯 이동·인원 상한(3명 규칙)·RED+BLUE·코어 공명·연구 상한 20·레벨업 금속10·상한에서 막힘·점령 +5%·시계 되돌림·저장 파일 재읽기 |
+| 저장 유지 | Play 종료 → 재시작 후 값 확인 | 통과 | 재화·채석장 Lv2·연구 1·편성 슬롯 유지 |
+| 접근 → 상호작용 버튼 → 패널 | 플레이어를 채석장 앞으로 옮긴 뒤 버튼 호출, 화면 캡처 | 통과 | 한글 표시 확인, 비용 부족 시 버튼 비활성 |
+| 벌목 | 나무 앞에서 버튼 4회 | 통과 | 목재 +15(3타), 나무 숨김, 재생 30초 표시 |
+| 편성 패널 배치 | 화면 캡처 | 통과 | 버튼 10개가 패널 안에 들어감(높이 64→54 조정 후) |
+| 조이스틱으로 직접 걸어서 조작 | 사람 조작 | 미실행 | 사용자 확인 필요(이동은 위치 이동으로 대신 시험) |
+| DashTest 씬 질주 동작 | Play | 미실행 | 질주 체크리스트의 Play 확인과 함께 |
+- 관찰(고치지 않음): LobbyScene의 Main Camera에 MainCamera 태그가 없다(LobbyUI는 다른 카메라를 찾아 쓰도록 처리). 바닥(Plane) 색이 분홍색으로 보인다. 지점 트리거가 일부 겹쳐(연구소·채석장) 가까운 쪽이 선택된다. 로비 NavMesh는 옛 장애물 기준으로 구워져 있다(로비에 NavMesh 사용자는 현재 없음).
