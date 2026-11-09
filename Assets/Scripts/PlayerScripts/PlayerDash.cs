@@ -1,6 +1,6 @@
 // 질주 모드: 게이지가 가득 차면 버튼이 나타나고, 버튼을 누르면 마지막 이동 방향으로 일직선 돌격한다.
 // 돌격 중에는 최대 속도까지 점점 가속한 뒤 유지하며, 적이나 정면의 벽에 부딪히면
-// 게이지를 모두 소모하고(적이면 피해를 준 뒤) 돌격을 끝낸다.
+// 게이지를 모두 소모하고(적이면 피해를 준 뒤) 돌격을 끝낸다. 부서지는 구조물(DestructibleStructure)은 부수고 끝낸다.
 using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
@@ -15,6 +15,8 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private float gaugePerHit = 10f;     // 임시값: 피해를 입힐 때마다 얻는 게이지
     [SerializeField] private float gaugePerKill = 20f;    // 임시값: 처치 시 추가로 얻는 게이지
     [SerializeField] private GameObject dashButton;       // 게이지가 가득 찼을 때만 표시
+    // 테스트 전용: 켜면 게이지가 항상 가득 찬 것으로 본다(적이 없는 시험 씬에서 버튼만으로 반복 돌격). 실제 전투 씬에서는 끈다.
+    [SerializeField] private bool infiniteGaugeForTest = false;
 
     [Header("충돌")]
     [SerializeField] private float dashDamage = 10f;      // 임시값: 돌격 중 적과 부딪혔을 때 피해
@@ -29,7 +31,7 @@ public class PlayerDash : MonoBehaviour
     public bool IsAtMaxSpeed => IsDashing && currentSpeed >= maxDashSpeed;
     public float Gauge { get; private set; }
     public float GaugeRatio => Gauge / maxGauge;
-    public bool IsGaugeFull => Gauge >= maxGauge;
+    public bool IsGaugeFull => infiniteGaugeForTest || Gauge >= maxGauge;
 
     private void Awake()
     {
@@ -53,6 +55,7 @@ public class PlayerDash : MonoBehaviour
         dashElapsed = 0f;
         currentSpeed = playerMovement.DefaultMoveSpeed;
         playerMovement.SetForcedDirection(dashDirection);
+        UpdateButtonVisibility();
     }
 
     // 충돌 없이 끝나는 경우(컴포넌트 비활성화 등)에는 게이지를 유지한다.
@@ -134,6 +137,20 @@ public class PlayerDash : MonoBehaviour
     {
         if (!IsDashing)
             return;
+
+        // 부서지는 구조물을 정면으로 들이받으면 부수고, 벽 충돌과 같이 게이지를 소모하며 끝낸다.
+        DestructibleStructure structure = collision.collider.GetComponentInParent<DestructibleStructure>();
+
+        if (structure != null)
+        {
+            if (!structure.IsBroken && IsFrontalWall(collision))
+            {
+                structure.Break(dashDirection, gameObject);
+                FinishDashOnImpact();
+            }
+
+            return;
+        }
 
         LivingEntity target = collision.collider.GetComponentInParent<LivingEntity>();
 

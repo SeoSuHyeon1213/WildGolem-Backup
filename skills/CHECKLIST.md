@@ -35,7 +35,7 @@
 
 ## 미결정 사항 (사용자 확인 필요)
 - [ ] 7-1. 시간 제한으로 끝날 때 게이지 소모 여부 (현재: 소모)
-- [ ] 9. 파괴 가능 지형 구분 방식 (태그 / 레이어 / 컴포넌트)
+- [ ] 9. 파괴 가능 지형 구분 방식 (태그 / 레이어 / 컴포넌트) — 현재 구현: 컴포넌트(DestructibleStructure), 2026-11-09 개발 판단. 사용자 확인 전
 - [ ] 10. 임시 수치 확정: maxGauge 100, gaugePerHit 10, gaugePerKill 20, maxDashSpeed 10, accelerationTime 2초, dashDamage 10
 
 ## 1. 사전 확인
@@ -51,6 +51,9 @@
   - `DealDamage(LivingEntity, float)`: TakeDamage 후 gaugePerHit, 처치 시 gaugePerKill 추가. 돌격 중에는 게이지 없음. 일반 공격 구현 시 이 메서드를 거쳐야 한다(PlayerAttack은 현재 비어 있음)
   - `dashButton`: 게이지 가득 참 && 돌격 중 아님일 때만 표시. **인스펙터 연결 필요**
   - 테스트: PlayerDash 컴포넌트 우클릭 → "게이지 채우기 (테스트)"
+  - 테스트용 `infiniteGaugeForTest`(2026-11-09): 켜면 게이지가 항상 가득 찬 것으로 본다. DashTest 씬에서 켜 두고 `dashButton`도 연결함(에디터 SerializedObject로 설정 후 저장). 실제 전투 씬에서는 끈다.
+  - 수정(2026-11-09): 돌격 시작 시 버튼이 숨겨지지 않던 문제 → StartDash에서 버튼 표시 갱신.
+  - 확인(2026-11-09, DashTest Play, 버튼 onClick 호출): 게이지 없이 버튼으로 돌격 시작·버튼 숨김 → 앞 3m 벽 파괴·돌격 종료·버튼 다시 표시 → 다시 눌러 재돌격. 파티원 RED가 플레이어 앞(약 1.5m)에 있어 RED가 먼저 벽에 닿고, 플레이어는 약 1.1m 지점에서 멈춤(복합 콜라이더 설계대로). 실제 터치 클릭은 사용자 확인 필요.
 - [ ] 단계 2: 직선 돌격 + 가속·유지 + 종료 시 속도 복원 (코드 완료, Play 모드 확인 전)
   - `Dash()`(버튼 연결 유지) → `StartDash()`: 마지막 이동 방향으로 고정
   - PlayerMovement: `LastMoveDirection`, `SetForcedDirection/ClearForcedDirection` 추가. `SetMoveSpeed`는 대입 방식
@@ -380,3 +383,27 @@ SaveData {
 | 조이스틱으로 직접 걸어서 조작 | 사람 조작 | 미실행 | 사용자 확인 필요(이동은 위치 이동으로 대신 시험) |
 | DashTest 씬 질주 동작 | Play | 미실행 | 질주 체크리스트의 Play 확인과 함께 |
 - 관찰(고치지 않음): LobbyScene의 Main Camera에 MainCamera 태그가 없다(LobbyUI는 다른 카메라를 찾아 쓰도록 처리). 바닥(Plane) 색이 분홍색으로 보인다. 지점 트리거가 일부 겹쳐(연구소·채석장) 가까운 쪽이 선택된다. 로비 NavMesh는 옛 장애물 기준으로 구워져 있다(로비에 NavMesh 사용자는 현재 없음).
+
+# 20261109-007 부서지는 전투 구조물 시범 (2026-11-09)
+- 결정(사용자): 전투 건물·조형물은 섞어 쓰기(부서지는 구조물=3D 저면 모델+픽셀 텍스처, 배경 장식=픽셀 스프라이트). 벽·기둥 같은 부서지는 구조물부터.
+- [x] 지시서 `mailbox/orders/20261109-007.order.md`: struct_wall_a(2.0×1.6×0.5)·struct_pillar_a(0.6×2.0×0.6) 크기 임시값, 온전한 모양+조각 4~8개, 텍스처 1유닛당 약 67픽셀, FBX+PNG+.blend, 미리보기 2장.
+- [x] 지침 skills/CLAUDE.md §9에 구조물 제작 방식 기록.
+- [x] GPT에게 지시서 알림(정형 알림, 2026-11-09 16:22 전송). GPT 작업 시작 확인.
+- [x] 납품 done.json(16:32) + GPT 완료 메시지 수신. 자동 검사(개발 담당, Blender 헤드리스 재가져오기): 두 FBX 모두 intact·조각 6개, 조각 합친 범위 = intact 범위(벽 2.0×1.6×0.5, 기둥 0.6×2.0×0.6), 원점 바닥 가운데, UV·재질 1개. 텍스처 134×183·40×194 RGB 8색 불투명. 계층: 루트 아래 intact_state·fractured_state 묶음(게임에서 fractured_state를 처음엔 꺼야 함).
+- 관찰: 조각이 거의 직육면체 블록(삼각형 12개씩)이라 돌무더기보다 벽돌 덩어리처럼 갈라진다. 미리보기 렌더는 텍스처가 부드럽게 보간되어 게임의 Point 필터 모습과 다르다.
+- [x] 사용자 시범 승인(2026-11-09). 크기는 임시값 유지. 검수 `mailbox/reviews/20261109-007.review.md` 작성.
+- [x] 가져오기 도구 `Assets/Editor/StructureImporter.cs`(메뉴 Tools/Wild Golem/우편함 구조물 가져오기): done.json의 kind=destructible_structure 항목 → `Assets/Models/Structures/<이름>/`(FBX·PNG 사본, Point·무압축·밉맵 없음, URP Lit 재질) → `Assets/PreFab/Structures/<이름>.prefab`(루트 BoxCollider, 조각 offset에 Rigidbody 질량 20 임시값 + 메시에 볼록 MeshCollider, fractured_state 꺼짐).
+- [x] 파괴 코드 `Assets/Scripts/StructureScripts/DestructibleStructure.cs`: `Break(방향, 부순 쪽)` → 온전한 모양·루트 충돌체 끄기, 조각 켜고 돌격 방향+위+무작위 힘(임시값), 부순 쪽과 조각 충돌 무시, 4초 뒤 조각 숨김(임시값). `onBroken` 이벤트.
+- [x] PlayerDash: 돌격 중 DestructibleStructure를 정면으로 들이받으면 부수고 게이지 소모·돌격 종료(벽 충돌과 같은 규칙). 스칠 때는 무시. 파괴 가능 지형 구분 = 컴포넌트 방식(질주 미결정 9번에 대한 개발 판단, 태그·레이어 설정 불필요).
+- 검증(2026-11-09): 재컴파일 오류 0, 가져오기 메뉴 오류·경고 0. 프리팹 크기 벽 2.0×1.6×0.5·기둥 0.6×2.0×0.6, 회전 0, Rigidbody·MeshCollider 각 6, 텍스처 Point. DashTest Play에서 앞 3m에 벽 생성 → 돌격 → IsBroken=true, 돌격 종료, 게이지 0 확인. Console 오류 1건은 기존 RedUnit "Enemy 태그 없음". 씬에는 배치·저장하지 않음(실행 중 생성만).
+- [ ] 사용자 확인: 조각 흩어짐 느낌·힘·사라지는 시간, 전투 씬 배치
+- [x] GPT에게 검수 결과 알림(2026-11-09, 사용자가 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 007 검수 확인, 본 작업은 새 지시서를 받은 뒤 진행.
+- 참고: BattleScene 카메라는 원근(FOV 60, 프리팹 기준 아래로 약 32° 기울어짐). 정확한 각도는 씬 확인 필요(이번엔 LobbyScene이 열려 있어 열지 않음).
+
+# Tripo CLI 3D 생성 도입 (2026-11-09)
+- 결정(사용자): 흐름 GPT 이미지·글 → Tripo CLI → GPT 블렌더 다듬기. Tripo 실행은 GPT(그림 담당). 크레딧은 지시서마다 상한을 적고 사용자 승인.
+- [x] 설치 확인: tripo-cli 0.11.2(npm 전역), `tripo doctor` 정상(키: default 프로필, 지역 ov), 잔액 500 크레딧. 키 값은 확인·기록하지 않음.
+- [x] 비용 확인(CLI 문서): P2 기본 100~130/회, H3.1 이미지→모델 20~50 + smart_low_poly 10, 텍스처 끄면 낮은 등급.
+- [x] 지침 skills/CLAUDE.md §9·§10, AGENTS.md "3D Generation"에 기록.
+- [x] GPT에게 바뀐 지침 알림 (2026-11-09, 사용자 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 규칙 확인, Tripo 실행은 GPT 담당·지시서별 상한 승인 후 dry-run 확인, 지금은 Tripo 명령 실행·생성 없음
+- [ ] 첫 Tripo 사용 지시서(대상·크레딧 상한) — 사용자 승인 필요
