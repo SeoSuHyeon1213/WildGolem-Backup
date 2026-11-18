@@ -30,9 +30,14 @@ public static class GolemSpriteImporter
     {
         { "wildgolem", "Assets/Animation/Square.controller" },
         { "red", "Assets/Animation/New Animator Controller.controller" },
+        // 마족 가고일(20261109-010). 기존 컨트롤러가 없어 처음 가져올 때 새로 만든다(기본 상태 idle_front).
+        { "gargoyle", "Assets/Animation/Gargoyle.controller" },
     };
 
-    private static readonly HashSet<string> Motions = new HashSet<string> { "idle", "walk", "attack", "hit" };
+    // 컨트롤러가 없을 때 새로 만들고 기본 상태로 둘 상태 이름
+    private const string NewControllerDefaultState = "idle_front";
+
+    private static readonly HashSet<string> Motions = new HashSet<string> { "idle", "walk", "attack", "hit", "death" };
 
     // 반복 재생하는 동작. 끝나도 기본 상태로 돌아가지 않는다.
     private static readonly HashSet<string> LoopMotions = new HashSet<string> { "idle", "walk" };
@@ -58,6 +63,12 @@ public static class GolemSpriteImporter
         public int[] frame_duration_ticks;
         public int tick_rate;
         public int[] cell_size;
+        // 칸 경계에 닿지 않도록 렌더 때 화면 X로 옮긴 픽셀 수(20261109-010 대각선 ±3px). 피벗을 같은 만큼 옮겨 되돌린다.
+        public int[] render_offset_pixels;
+        // 1회 재생 후 마지막 프레임을 유지하는 동작(사망). 기본 상태로 돌아가는 전환을 만들지 않는다.
+        public bool hold_last_frame;
+
+        public int OffsetX => render_offset_pixels != null && render_offset_pixels.Length > 0 ? render_offset_pixels[0] : 0;
 
         public int CellSize => cell_size != null && cell_size.Length > 0 && cell_size[0] > 0 ? cell_size[0] : DefaultCellSize;
     }
@@ -138,7 +149,7 @@ public static class GolemSpriteImporter
             AnimationClip clip = BuildClip(sheetPath, item, target, loop);
 
             if (clip != null)
-                AddState(target, $"{motion}_{direction}", clip, loop);
+                AddState(target, $"{motion}_{direction}", clip, loop || item.hold_last_frame);
         }
 
         AssetDatabase.SaveAssets();
@@ -254,6 +265,11 @@ public static class GolemSpriteImporter
         platform.textureCompression = TextureImporterCompression.Uncompressed;
         importer.SetPlatformTextureSettings(platform);
 
+        // 렌더 때 그림을 화면 X로 옮긴 만큼 피벗도 같은 쪽으로 옮기면, 오브젝트 기준 그림 위치가 원래대로 돌아와
+        // 방향을 바꿔도 발 위치가 흔들리지 않는다. 이미지 X는 화면 X와 같은 방향이다.
+        int offsetX = item.OffsetX;
+        Vector2 pivot = new Vector2(0.5f + offsetX / (float)cell, 0.5f);
+
         // 칸 격자로 자른다. 피벗은 칸 중앙으로 두어 기존 Idle·Walk(중앙 피벗)와 높이를 맞추고,
         // 모든 프레임이 같은 칸을 쓰므로 팔을 뻗어도 몸이 흔들리지 않는다.
         var factory = new SpriteDataProviderFactories();
@@ -271,8 +287,8 @@ public static class GolemSpriteImporter
             SpriteRect rect = previous.FirstOrDefault(r => r.name == spriteName)
                               ?? new SpriteRect { name = spriteName, spriteID = GUID.Generate() };
             rect.rect = new Rect(i * cell, 0, cell, cell);
-            rect.alignment = SpriteAlignment.Center;
-            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.alignment = offsetX == 0 ? SpriteAlignment.Center : SpriteAlignment.Custom;
+            rect.pivot = pivot;
             rect.border = Vector4.zero;
             rects.Add(rect);
         }
@@ -346,8 +362,8 @@ public static class GolemSpriteImporter
     }
 
     // 상태는 코드(GolemMotionAnimator)가 이름으로 직접 재생한다. 공격·피격은 끝나면 기본 상태(Idle)로 돌아가고,
-    // 반복 동작(idle·walk)은 돌아가는 전환을 두지 않는다.
-    private static void AddState(string target, string stateName, AnimationClip clip, bool loop)
+    // 반복 동작(idle·walk)과 마지막 프레임을 유지하는 동작(death)은 돌아가는 전환을 두지 않는다.
+    private static void AddState(string target, string stateName, AnimationClip clip, bool noReturn)
     {
         if (!ControllerByTarget.TryGetValue(target, out string controllerPath))
         {
@@ -356,6 +372,14 @@ public static class GolemSpriteImporter
         }
 
         var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(controllerPath);
+        bool created = false;
+
+        if (controller == null && !File.Exists(Path.Combine(Directory.GetParent(Application.dataPath).FullName, controllerPath)))
+        {
+            controller = AnimatorController.CreateAnimatorControllerAtPath(controllerPath);
+            created = true;
+            Debug.Log($"[골렘 스프라이트] '{target}'의 Animator Controller를 새로 만들었습니다: {controllerPath}");
+        }
 
         if (controller == null)
         {
@@ -379,7 +403,14 @@ public static class GolemSpriteImporter
 
         state.motion = clip;
 
-        if (!loop && defaultState != null && state.transitions.All(t => t.destinationState != defaultState))
+        // 새로 만든 컨트롤러는 기본 상태가 정해질 때까지 기다렸다가 idle_front를 기본으로 둔다.
+        if (stateName == NewControllerDefaultState && (created || defaultState == null))
+        {
+            machine.defaultState = state;
+            defaultState = state;
+        }
+
+        if (!noReturn && defaultState != null && state.transitions.All(t => t.destinationState != defaultState))
         {
             AnimatorStateTransition back = state.AddTransition(defaultState);
             back.hasExitTime = true;

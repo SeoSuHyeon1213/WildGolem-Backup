@@ -1,4 +1,4 @@
-// 골렘의 스프라이트 애니메이션(대기·걷기·공격·피격)을 바라보는 방향에 맞춰 재생한다.
+// 골렘·마족의 스프라이트 애니메이션(대기·걷기·공격·피격·사망)을 바라보는 방향에 맞춰 재생한다.
 // 방향은 7개(정면, 앞쪽 대각선 ±45°, 옆 ±90°, 뒤쪽 대각선 ±135°)이고, 뒷모습(180°)은 뒤쪽 대각선으로 대신한다.
 // Animator 상태 이름은 "<모션>_<방향>"이다(에디터 메뉴 Tools/Wild Golem/우편함 골렘 스프라이트 가져오기가 만든다).
 // 아직 납품되지 않은 방향은 가까운 방향으로 대신 재생한다.
@@ -21,6 +21,7 @@ public class GolemMotionAnimator : MonoBehaviour
     private const string WalkMotion = "walk";
     private const string AttackMotion = "attack";
     private const string HitMotion = "hit";
+    private const string DeathMotion = "death";
 
     // 각도 구간(45° 단위) → 방향 이름. 각도 0은 카메라 쪽(−Z), +는 화면 오른쪽(+X)이다.
     private static readonly Dictionary<int, string> DirectionBySector = new Dictionary<int, string>
@@ -61,6 +62,9 @@ public class GolemMotionAnimator : MonoBehaviour
             WalkHashes.Add(StateHash($"{WalkMotion}_{direction}"));
         }
     }
+
+    // 사망 동작을 재생한 뒤에는 대기·걷기로 바꾸지 않는다(마지막 프레임 유지).
+    public bool IsDead { get; private set; }
 
     private Vector3 lastFacing = Vector3.back;
     private Vector3 previousPosition;
@@ -124,10 +128,17 @@ public class GolemMotionAnimator : MonoBehaviour
 
     public void PlayHit() => Play(HitMotion, lastFacing);
 
+    // 사망 상태는 끝나도 다른 상태로 돌아가지 않아 마지막 프레임이 남는다. 사망 그림이 없는 골렘은 경고만 남긴다.
+    public void PlayDeath()
+    {
+        IsDead = true;
+        Play(DeathMotion, lastFacing);
+    }
+
     // 공격·피격이 끝난 뒤나 이동 상태·방향이 바뀌면 대기·걷기 상태로 바꾼다.
     private void UpdateLocomotion(bool isMoving)
     {
-        if (animator == null || !animator.isActiveAndEnabled || animator.runtimeAnimatorController == null)
+        if (IsDead || animator == null || !animator.isActiveAndEnabled || animator.runtimeAnimatorController == null)
             return;
 
         AnimatorStateInfo current = animator.GetCurrentAnimatorStateInfo(0);
@@ -154,7 +165,7 @@ public class GolemMotionAnimator : MonoBehaviour
 
     private void Play(string motion, Vector3 worldDirection)
     {
-        if (animator == null)
+        if (animator == null || (IsDead && motion != DeathMotion))
             return;
 
         worldDirection.y = 0f;
