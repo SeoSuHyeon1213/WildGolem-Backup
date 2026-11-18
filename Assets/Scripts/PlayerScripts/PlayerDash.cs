@@ -145,7 +145,8 @@ public class PlayerDash : MonoBehaviour
         {
             if (!structure.IsBroken && IsFrontalWall(collision))
             {
-                structure.Break(dashDirection, gameObject);
+                Vector3 hitPoint = collision.contactCount > 0 ? collision.GetContact(0).point : collision.collider.bounds.center;
+                structure.Break(dashDirection, hitPoint, currentSpeed, gameObject);
                 FinishDashOnImpact();
             }
 
