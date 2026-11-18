@@ -396,7 +396,9 @@ SaveData {
 - [x] 파괴 코드 `Assets/Scripts/StructureScripts/DestructibleStructure.cs`: `Break(방향, 부순 쪽)` → 온전한 모양·루트 충돌체 끄기, 조각 켜고 돌격 방향+위+무작위 힘(임시값), 부순 쪽과 조각 충돌 무시, 4초 뒤 조각 숨김(임시값). `onBroken` 이벤트.
 - [x] PlayerDash: 돌격 중 DestructibleStructure를 정면으로 들이받으면 부수고 게이지 소모·돌격 종료(벽 충돌과 같은 규칙). 스칠 때는 무시. 파괴 가능 지형 구분 = 컴포넌트 방식(질주 미결정 9번에 대한 개발 판단, 태그·레이어 설정 불필요).
 - 검증(2026-11-09): 재컴파일 오류 0, 가져오기 메뉴 오류·경고 0. 프리팹 크기 벽 2.0×1.6×0.5·기둥 0.6×2.0×0.6, 회전 0, Rigidbody·MeshCollider 각 6, 텍스처 Point. DashTest Play에서 앞 3m에 벽 생성 → 돌격 → IsBroken=true, 돌격 종료, 게이지 0 확인. Console 오류 1건은 기존 RedUnit "Enemy 태그 없음". 씬에는 배치·저장하지 않음(실행 중 생성만).
-- [ ] 사용자 확인: 조각 흩어짐 느낌·힘·사라지는 시간, 전투 씬 배치
+- [x] 벽 파편 약함(사용자 Play 확인: 기둥은 잘 무너지나 벽은 미세한 균열만) → 유니티 물리로 강화(2026-11-09). 조각 속도를 질량과 무관하게 지정(VelocityChange: 돌격 방향 4, 위 2.5, 무작위 1.5 m/s), 무작위 회전(최대 8 rad/s), 부딪힌 지점에 가까울수록 ×1.5~먼 조각 ×0.6, 돌격 속도/10을 0.75~1.5로 제한한 배율. 모두 임시값. PlayerDash가 접촉 지점·현재 속도를 넘김.
+  - 확인(DashTest Play): 4.5m 앞 벽 → 조각 6개가 원위치에서 약 0.7~1.7m 앞으로 흩어져 바닥에 쓰러짐(높이 1.6m 조각 포함), 캡처로 확인. Console 오류는 기존 RedUnit 태그 1건.
+- [ ] 사용자 확인: 강화 후 벽 파편 느낌, 사라지는 시간(4초), 전투 씬 배치. 부족하면 벽 조각 수 증가(GPT 재작업) 검토
 - [x] GPT에게 검수 결과 알림(2026-11-09, 사용자가 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 007 검수 확인, 본 작업은 새 지시서를 받은 뒤 진행.
 - 참고: BattleScene 카메라는 원근(FOV 60, 프리팹 기준 아래로 약 32° 기울어짐). 정확한 각도는 씬 확인 필요(이번엔 LobbyScene이 열려 있어 열지 않음).
 
@@ -407,3 +409,48 @@ SaveData {
 - [x] 지침 skills/CLAUDE.md §9·§10, AGENTS.md "3D Generation"에 기록.
 - [x] GPT에게 바뀐 지침 알림 (2026-11-09, 사용자 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 규칙 확인, Tripo 실행은 GPT 담당·지시서별 상한 승인 후 dry-run 확인, 지금은 Tripo 명령 실행·생성 없음
 - [ ] 첫 Tripo 사용 지시서(대상·크레딧 상한) — 사용자 승인 필요
+
+# 20261109-008 마족 원안: 가고일 (2026-11-09)
+- 결정(사용자): 마족 첫 디자인은 가고일 스타일, 게임은 캐주얼 스타일, 포인트 색은 붉은색+보라색 섞기.
+- 개발 판단: RED 골렘 코어와 구분되도록 진홍~보라로 이어지는 색으로 지시. 원안 이미지만 요청하고 Tripo 3D 생성은 원안 확인 뒤 크레딧 상한을 정해 별도 지시서로.
+- [x] 지시서 `mailbox/orders/20261109-008.order.md`: 안 3개(concept-01~03) + 추천 1안 3면도(turnaround), 흰 배경·평면 조명·A자 자세, 긴 변 1024px 이상, Tripo 실행 금지.
+- [x] GPT에게 지시서 알림(2026-11-09, 사용자 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 요구사항 확인, 원안 3개+추천안 3면도 제작 시작, Tripo 미사용, 완료 후 done.json·Claude 알림.
+- [x] 납품 done.json(17:52) + GPT 완료 메시지 수신. 자동 검사: sha256 4개 일치, 원안 1254×1254 흰 배경, 3면도 2172×724, Tripo·Blender 미사용(크레딧 0). 86px 축소 미리보기로 가독성 확인. 검수 `mailbox/reviews/20261109-008.review.md`.
+- [x] 사용자 안 선택: **01안 그대로**(2026-11-09). 색 섞기·수정 원안 없음.
+- [ ] (선택 후) Tripo 3D 생성 지시서 — 크레딧 상한 사용자 승인 필요
+
+# 20261109-009 가고일 마족 3D 모델 (Tripo 첫 사용, 2026-11-09)
+- 결정(사용자): 008 01안 그대로, Tripo 크레딧 상한 40.
+- [x] 지시서 `mailbox/orders/20261109-009.order.md`: 3면도 multiview(안 되면 정면 1장) → H3.1 smart_low_poly, texture=false, face_limit 3000(임시값), 생성 1회·재시도 없음, dry-run 먼저. 블렌더: 키 1.0m(임시값), 팔 띄우기, 빛나는 부분 재질 분리. 애니메이션·픽셀 렌더는 별도.
+- [x] GPT에게 지시서 알림(2026-11-09, 사용자 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: dry-run으로 예상 비용 먼저 확인, 40 이하일 때만 1회 생성, 블렌더 정리, 재생성 없음, done.json·Claude 알림.
+- [x] 납품 done.json(18:26) + GPT 완료 메시지 수신. 검수: dry-run 30·실제 30크레딧(상한 40), 잔액 500→470, sha256 17개 일치, FBX 재가져오기(메시 8·삼각형 2929·높이 1.0m·바닥 원점·재질 6·아마추어 없음), 키 문자열 없음. 검수 `mailbox/reviews/20261109-009.review.md`.
+- [x] 사용자 형태·크기 확정(2026-11-09).
+- [ ] 다음: 리깅·애니메이션 → 12px 7방향 픽셀 렌더 지시서(모션 종류·프레임 수 사용자 결정)
+
+# 20261109-010 가고일 리깅·애니메이션·12px 7방향 렌더 (2026-11-09)
+- 결정(사용자): 모션 = 골렘과 같은 4개(idle 8·walk 12·attack 6·hit 5프레임, 004 타이밍) + 사망(death 8프레임×3tick, 임시값). 리깅 = GPT가 블렌더에서 직접(Tripo 미사용).
+- [x] 지시서 `mailbox/orders/20261109-010.order.md`: 5동작×7방향 35장, 칸 86×86, 004와 같은 직교 카메라, 시범 2장(idle_front·attack_front) 먼저.
+- [x] GPT에게 지시서 알림(2026-11-09, 사용자 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 009 모델에 블렌더 리깅 후 idle_front·attack_front 시범 2장만 렌더하고 멈춰 알림.
+- [x] 시범 2장 도착(18:48, trial/ready.txt + GPT 알림). 개발 담당 검사: idle 688×86(8프레임)·attack 516×86(6프레임), 알파 0/255만, 전 프레임 바닥선 84행(골렘과 같음), 칸 경계 닿음 없음(공격 3번째 프레임 오른쪽 여백 4px). 높이 76px vs 와일드골렘 84px(1.0m:1.1m 비율과 맞음). 리깅 13본, Tripo 미사용.
+- 관찰: 몸이 골렘보다 훨씬 어둡고 표면에 점 잡음이 있어 골렘의 깔끔한 면 그림과 느낌이 다르다. 어두운 몸에 팔이 묻혀 공격 동작(할퀴기)이 잘 안 보이고, 눈·균열 색도 약하다.
+- [x] 시범 1차 사용자 판정: 밝기 수정 후 재시범(2026-11-09). 요청 내용 `mailbox/reviews/20261109-010.review.md`(몸 밝기↑, 점 잡음 제거, 공격 팔 가독성, 눈·균열 대비 재확인, 형태·카메라·뼈대 유지, v1은 trial/v1/ 보관).
+- [x] GPT에게 재시범 요청 알림(2026-11-09, 사용자 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 1차 시범 trial/v1/ 보관, 몸 밝기·점 잡음·공격 팔·눈·균열 대비 조정 후 시범 2장만 재렌더하고 멈춰 알림.
+- [x] 2차 시범 도착·검사: 규격 통과(알파 0/255, 바닥선 84, 경계 여백), 몸 밝기 골렘과 비슷, 색 수 92→75, 공격 팔 보임. 옅은 얼룩·팔/몸 내부 경계 약함은 남음. 검수 기록 갱신.
+- [x] 2차 시범 사용자 승인(2026-11-09).
+- [x] GPT에게 본 작업 진행 알림(2026-11-09, 사용자 문안 승인 후 Codex "Wildgolem 지침 통합"에 전송). GPT 답: 리뷰·2차 시범 설정 확인, 시범 2장 유지하며 나머지 33장·리깅 FBX·타이밍 파일 제작·검증 후 done.json·Claude 알림.
+- [x] 최종 납품 done.json(2026-11-16 15:11) + GPT 완료 메시지 수신. 개발 담당 전수 검사: 35장·273프레임, sha256 일치, 크기·알파·바닥선 84·여백(최소 2px)·타이밍 모두 지시서와 일치, death 마지막 프레임 유지.
+- [x] 사용자 확인(2026-11-16): hit 반동 50%·대각선 ±3px 보정은 사용자가 직접 허용함. 009 파일 변경은 기록만.
+- (기록) (1) GPT가 "사용자 직접 허용"으로 적은 hit 반동 50%·대각선 ±3px 보정이 실제 사용자 결정인지 (2) 009 gargoyle_a.blend가 11-09 19:19에 수정됨(지시서 위반, 원본 사본 보관됨, 게임 영향 없음).
+- [x] Unity 반영(2026-11-18): GolemSpriteImporter에 gargoyle 등록(`Assets/Animation/Gargoyle.controller` 없으면 새로 만들고 기본 상태 idle_front), 모션에 death 추가, done.json `render_offset_pixels`만큼 피벗을 같은 쪽으로 옮겨 대각선 ±3px 되돌림, `hold_last_frame` 동작은 기본 상태로 돌아가는 전환 없음. GolemMotionAnimator에 `PlayDeath()`·`IsDead` 추가(사망 후 대기·걷기·공격·피격으로 바뀌지 않음).
+- [x] 가져오기 실행: 시트 35장 → `Assets/Sprites/Golems/gargoyle/`, 클립 35개 → `Assets/Animation/Golems/gargoyle/`, 상태 35개. 컴파일 오류 없음. 경고 6개는 다른 납품의 비스프라이트 항목(struct_*, gargoyle_concept/turnaround) 이름 건너뜀이라 무해.
+- [x] 확인: PPU 66.93·Point·칸 86, 피벗 front (43,43)·left/back_left (40,43)·right/back_right (46,43). 클립 길이 idle 1.0·walk 1.5·attack 0.667·hit 0.333·death 1.0초, attack·hit → idle_front 전환, idle·walk·death 전환 없음.
+- [x] Play 확인(DashTest, 임시 오브젝트, 저장 안 함): 화면 크기 1.29유닛(와일드골렘 칸과 같음), 이동 시 옆모습 전환, 공격·피격 후 idle_front 복귀, 사망 후 마지막 프레임(death_front_7) 유지·이동해도 유지. 기존 오류 "Tag: Enemy is not defined"만 있음.
+- [x] 적 프리팹(2026-11-18): `Assets/PreFab/Enemies/Gargoyle.prefab` = SpriteRenderer + Animator(Gargoyle.controller) + 키네마틱 Rigidbody + BoxCollider(0.5×1.0×0.3, Player와 같음) + NavMeshAgent(baseOffset 0.57, radius 0.3, speed 2, 회전 끔) + GolemMotionAnimator + EnemyCotroller(체력 30).
+  - 피해 경로: `LivingEntity.TakeDamage`(PlayerDash.DealDamage와 같음).
+  - `EnemyCotroller` 보강: 대상 미지정 시 Player 추적, 사거리 1.2 안이면 멈추고 공격 동작(쿨다운 1초), 피격 시 0.3초 멈춤·피격 동작, 사망 시 에이전트·콜라이더 끄고 사망 동작 후 3초 뒤 삭제.
+  - 임시값: 체력 30, 이동 속도 2, 사거리 1.2, 피격 정지 0.3초, 시체 3초.
+  - Player는 체력이 없어 가고일 공격은 동작만 재생하고 피해를 주지 않음. 넉백은 아직 없음(질주 작업에서 NavMeshAgent 처리와 함께 결정).
+- [x] Play 확인(DashTest, 실행 중 생성, 씬 저장 안 함): NavMesh 위에서 Player 추적·걷기 방향 전환·근접 공격 동작, 피해 10씩 체력 감소·피격 동작, 돌격 충돌로 피해 10·처치 → 사망 마지막 프레임 → 3초 뒤 삭제, 높이 0.65로 Player와 같음.
+  - 관찰: 4번 돌격 중 1번은 가고일이 다가오는 중에 돌격이 피해 없이 멈춤(원인 미확인, 재현 안 됨).
+  - Console: 기존 "Tag: Enemy is not defined"와 에디터 Burst 컴파일 서버 오류(코드와 무관)만 있음.
+- [ ] 남은 일: 전투 씬 배치·생성기, Player 체력, 넉백, 체력 등 수치 확정. 방향 전환 때 발 위치·사망 연출 느낌은 사용자 확인 필요.
