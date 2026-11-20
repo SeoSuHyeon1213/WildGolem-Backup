@@ -104,3 +104,9 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# 그림 협업 우편함(공유 폴더) — git에서 제외
+/mailbox/
+
+# 3D 원본 그림 작업 폴더(.blend·.af 등 큰 원본, 2026-11-09 사용자 결정으로 git 제외)
+/WildGolemSprite3D/

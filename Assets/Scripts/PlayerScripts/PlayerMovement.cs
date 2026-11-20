@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         defaultMoveSpeed = moveSpeed;
+
+        // 7방향 대기·걷기·공격·피격 스프라이트 재생. 씬에 붙어 있지 않으면 실행 중에 붙인다(RedUnit과 같은 방식).
+        if (!TryGetComponent(out GolemMotionAnimator _))
+            gameObject.AddComponent<GolemMotionAnimator>();
     }
 
     private void Update()

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c5a40984c28c14594017418552242b, type: 3}
+  m_Name: LobbyConfig
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyConfig
+  maxOfflineHours: 12
+  bonusPerConqueredRegion: 0.05
+  startResources:
+  - type: 0
+    amount: 100
+  - type: 1
+    amount: 100
+  - type: 2
+    amount: 50
+  buildings:
+  - {fileID: 11400000, guid: 07cf3ad55dd2cd34ba0286e0851f9156, type: 2}
+  - {fileID: 11400000, guid: ea384d712800fa743b0fef0c0521ac80, type: 2}
+  - {fileID: 11400000, guid: be44cc64e36da3741b00f120fe7ce8a8, type: 2}
+  - {fileID: 11400000, guid: 189e76d32cb4d4a4bb8243489447c1d7, type: 2}
+  - {fileID: 11400000, guid: bc3c1f77d0c6ba546a76de450c4947bb, type: 2}
+  golems:
+  - {fileID: 11400000, guid: 283af839dbf4cae40bcf34b527ee1828, type: 2}
+  - {fileID: 11400000, guid: f690a96395ee21b4fa853f4b80f76fa0, type: 2}
+  - {fileID: 11400000, guid: 1a5a267b96aa96248b214e72142d48f2, type: 2}
+  forest:
+    assignSlots: 3
+    woodPerGolemPerHour: 20
+    woodPerHit: 5
+    hitsPerTree: 3
+    regrowSeconds: 30
+  research:
+    baseLevelCap: 10
+    levelCapPerStep: 10
+    maxSteps: 5
+    baseStepCost:
+    - type: 1
+      amount: 100
+    - type: 2
+      amount: 100
+  golemLevel:
+    currency: 2
+    costPerLevel: 10
+  formationRules:
+  - contentId: normal
+    displayName: "\uC77C\uBC18 \uC6D0\uC815"
+    maxMembersIncludingPlayer: 6
+  - contentId: raid
+    displayName: "\uBCF4\uC2A4 \uB808\uC774\uB4DC"
+    maxMembersIncludingPlayer: 9
