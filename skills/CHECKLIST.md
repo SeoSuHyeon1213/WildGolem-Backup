@@ -453,4 +453,8 @@ SaveData {
 - [x] Play 확인(DashTest, 실행 중 생성, 씬 저장 안 함): NavMesh 위에서 Player 추적·걷기 방향 전환·근접 공격 동작, 피해 10씩 체력 감소·피격 동작, 돌격 충돌로 피해 10·처치 → 사망 마지막 프레임 → 3초 뒤 삭제, 높이 0.65로 Player와 같음.
   - 관찰: 4번 돌격 중 1번은 가고일이 다가오는 중에 돌격이 피해 없이 멈춤(원인 미확인, 재현 안 됨).
   - Console: 기존 "Tag: Enemy is not defined"와 에디터 Burst 컴파일 서버 오류(코드와 무관)만 있음.
+- [x] 기존 오류 수정(2026-11-18): RedUnit.Start의 `FindGameObjectWithTag("Enemy")`(태그 미정의 → UnityException)와 Update의 `LookAt` 제거. 대신 `FindNearestEnemy()`(살아 있는 EnemyCotroller 중 가장 가까운 적) 추가. Play 확인: 오류 없음, RED 회전 (0,0,0) 유지, 가고일을 가장 가까운 적으로 찾음. RedUnit.Attack은 대상의 IUnit으로 피해를 주는데 적은 IUnit이 아니고 호출하는 곳도 없어 그대로 둠(파티 공격 구현 때 피해 경로 결정 필요).
+- [x] 적 이동 8방향 제한(2026-11-18, 사용자 요청): EnemyCotroller가 NavMeshAgent는 경로 계산에만 쓰고(isStopped), 다음 꺾임점 방향을 45° 단위로 맞춰 `NavMeshAgent.Move`로 옮긴다. 경계 각도 떨림 방지 여유각 `directionHysteresis` 10°(임시값) — 목표가 비스듬하면 계단 모양으로 걷는다.
+  - Play 확인(DashTest, 가고일 2마리, 매 프레임 기록): 이동 프레임 1,000여 개 모두 45° 배수(GA 90°·45°, GB −45°·0°), Player 앞에서 정지, 오류 없음. 이전에는 67.4°·−39.8°로 직선 이동했음.
+  - 미확인: DashTest NavMesh가 평면뿐(정점 16개, 구조물이 구워져 있지 않음)이라 벽을 돌아가는 경로는 확인 못 함. 다른 적과 겹침 회피(avoidance)는 Move에 적용되지 않음.
 - [ ] 남은 일: 전투 씬 배치·생성기, Player 체력, 넉백, 체력 등 수치 확정. 방향 전환 때 발 위치·사망 연출 느낌은 사용자 확인 필요.
